@@ -75,8 +75,7 @@
                    alum[contador].calcularProm();
                    contador++;
                    
-                   /*DecimalFormat df=new DecimalFormat("#.00"); //El cero indica cuantas decimales nqueremos
-                   prom =Double.parseDouble(df.format(prom));*/
+                  
                    
                  
                  

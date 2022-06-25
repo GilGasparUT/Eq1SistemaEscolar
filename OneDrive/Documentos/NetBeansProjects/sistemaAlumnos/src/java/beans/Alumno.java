@@ -5,6 +5,8 @@
  */
 package beans;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author adria
@@ -86,6 +88,10 @@ public class Alumno
     }
     public double calcularProm()
     {
-        return (cjv+dwi+ecbd)/3.0;
+     
+         prom = (cjv+dwi+ecbd)/3.0;
+          DecimalFormat df=new DecimalFormat("#.00"); //El cero indica cuantas decimales nqueremos
+         prom =Double.parseDouble(df.format(prom));
+         return prom;
     }
 }
