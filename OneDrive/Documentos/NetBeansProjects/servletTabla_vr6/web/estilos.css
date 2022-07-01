@@ -1,0 +1,42 @@
+
+body
+{
+    background-color: #ECF0F1;
+ }
+
+h1{
+     color: #17202A;
+     text-align: center;
+}
+
+#tabla {
+   width: 80%;   
+}
+table 
+{
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+
+th
+{
+    background: #808080;
+    color:white;
+}
+ td {
+   width: 15%;
+   text-align: center;
+   border: 0.5px solid #000;
+   padding: 0.3em;
+ }
+ button{
+    background-color: #808080;
+    color:white;
+    border:3px solid #808080; 
+    width: auto;
+    display: block;
+    margin: auto;
+    
+ }
+
