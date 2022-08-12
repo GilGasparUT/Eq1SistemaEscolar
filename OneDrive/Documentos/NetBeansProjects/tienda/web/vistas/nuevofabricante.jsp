@@ -22,8 +22,8 @@
                 <tbody>
                     <tr>
                         <td><input type="text"   name="tfCodigo_fabricante" value="" size="11" maxlength="11"/></td>
-                        <td><input type="text"   name="tfRFC"       value="" size="11"                /></td>
                         <td><input type="text"   name="tfNombre"    value="" size="15"               /></td>
+                        <td><input type="text"   name="tfRFC"       value="" size="11"                /></td>
                         <td><input type="submit" name="accion"      value="Agregar"                  /></td>  
                         <td><a href="SFabricante"><button>Regresar</button></a>                                           </td>
                     </tr>

@@ -1,6 +1,7 @@
 
-<%@page import="beans.Fabricante"%>
+
 <%@page import="dao.DAOFabricante"%>
+<%@page import="beans.Fabricante"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
                     DAOFabricante dao    = new DAOFabricante();
                     Fabricante fabricante    = new Fabricante();
                     String codigo_fabricante = request.getAttribute("codigo_fabricante").toString();
-                    fabricante          = dao.buscar(codigo_fabricante);
+                    fabricante         = dao.buscar(codigo_fabricante);
               %>
               
         <div>
@@ -26,9 +27,9 @@
                 <thead>
                     <tr>
                        
-                        <th>Codigo_fabricante</th>
-                        <th>RFC</th>
+                        <th>Codigo_Fabricante</th>
                         <th>Nombre</th>
+                        <th>RFC</th>
                         <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
@@ -36,11 +37,11 @@
                     <tr>
                         <input type = "hidden" name ="tfCodigo_fabricanteOld" value="<%=fabricante.getCodigo_fabricante()%>">
                         
-                        <td><input type="text"   name="tfId_cliente"     value="<%=fabricante.getCodigo_fabricante()%>"    size="11" maxlength="11"/></td>
-                        <td><input type="text"   name="tfRFC"            value="<%=fabricante.getRFC()%>"                  size="15"               /></td>
-                        <td><input type="text"   name="tfNombre"         value="<%=fabricante.getNombre()%>"               size="15"               /></td>
-                        <td><input type="submit" name="accion"           value="Actualizar"                                             /></td>  
-                        <td><a     href="Sfabricante"> <button>Regresar </button></a></td>
+                        <td><input type="text"   name="tfCodigo_fabricante"       value="<%=fabricante.getCodigo_fabricante()%>"    size="11" maxlength="11"/></td>
+                        <td><input type="text"   name="tfNombre"                  value="<%=fabricante.getNombre()%>"           size="15"                 /></td>
+                        <td><input type="text"   name="tfRFC"                     value="<%=fabricante.getRFC()%>"        size="15"                    /></td>
+                        <td><input type="submit" name="accion"           value="Actualizar"/></td>  
+                        <td><a href="SFabricante"> <button>Regresar </button></a></td>
                     </tr>
                 </tbody>
             </table>

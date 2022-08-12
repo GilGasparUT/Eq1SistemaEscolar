@@ -1,6 +1,5 @@
 package dao;
 
-
 import beans.Fabricante;
 import conexion.ConexionMySQL;
 import java.sql.Connection;
@@ -20,7 +19,7 @@ public class DAOFabricante
             
     public ArrayList mostrar()
     {
-        ArrayList<Fabricante> listaFabricante = new ArrayList<>();
+        ArrayList<Fabricante> listaFabricantes = new ArrayList<>();
         String sql = "SELECT * FROM fabricante";
             
         try 
@@ -37,7 +36,7 @@ public class DAOFabricante
                 fabricante.setNombre(rs.getString("Nombre"));
                 fabricante.setRFC(rs.getString("RFC"));
                              
-                listaFabricante.add(fabricante);
+                listaFabricantes.add(fabricante);
             }
             rs.close();
             ps.close();
@@ -48,17 +47,15 @@ public class DAOFabricante
             Logger.getLogger(DAOFabricante.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return listaFabricante;
+        return listaFabricantes;
     }
     
     public boolean agregar(Fabricante fabricante)
     {
-        String sql = "INSERT INTO fabricante VALUES('" + fabricante.getCodigo_fabricante()+"','" +
-                fabricante.getRFC() + "','" +
-                fabricante.getNombre() + ")";
-               
-                
-        
+        String sql = "INSERT INTO fabricante VALUES('" + 
+                fabricante.getCodigo_fabricante() +"','"+
+                fabricante.getNombre() +"','"+
+                fabricante.getRFC() +"')";
         try 
         {
             con = ConexionMySQL.getConnection();
@@ -80,7 +77,7 @@ public class DAOFabricante
     
     public Fabricante buscar (String codigo_fabricante)
     {
-        String sql = "SELECT * FROM fabricante WHERE Id_cliente='"+codigo_fabricante+"'";
+        String sql = "SELECT * FROM fabricante WHERE Codigo_fabricante='"+codigo_fabricante+"'";
          try 
         {
             con = ConexionMySQL.getConnection(); 
@@ -90,8 +87,8 @@ public class DAOFabricante
             {
                 fabricante=new Fabricante();
                 fabricante.setCodigo_fabricante(rs.getString("Codigo_fabricante"));
-                fabricante.setRFC(rs.getString("RFC"));
                 fabricante.setNombre(rs.getString("Nombre"));
+                fabricante.setRFC(rs.getString("RFC"));
      
             }
             rs.close();
@@ -107,13 +104,13 @@ public class DAOFabricante
     }
    
     
-    public boolean actualizar(Fabricante fabricante,String old)
+   public boolean actualizar(Fabricante fabricante,String old)
     {
     String sql = "UPDATE fabricante SET "+
-                 "Codigo_fabricante= '" + fabricante.getCodigo_fabricante() + "', " +
-                 "RFC       = '" + fabricante.getRFC()    + "', " +
-                 "Nombre    = '" + fabricante.getNombre() + "', " +
-                 "WHERE Id_cliente = '" + old + "'";
+                 "Codigo_fabricante ='"+ fabricante.getCodigo_fabricante() +"', "+
+                 "Nombre    ='"+ fabricante.getNombre()+"', "+
+                 "RFC      ='"+ fabricante.getRFC()+"' " +
+                 "WHERE Codigo_fabricante ='" + old + "'";
          try 
         {
             con = ConexionMySQL.getConnection(); 
@@ -131,10 +128,11 @@ public class DAOFabricante
         return true;
     }
    
+   
 
-    public boolean eliminar(String codigo_fabricante)
+   public boolean eliminar(String codigo_fabricante)
     {
-       String sql = "DELETE FROM fabricante WHERE Id_cliente ='" + codigo_fabricante + "'";   
+       String sql = "DELETE FROM fabricante WHERE Codigo_fabricante ='" + codigo_fabricante + "'";   
                  
        
        try 

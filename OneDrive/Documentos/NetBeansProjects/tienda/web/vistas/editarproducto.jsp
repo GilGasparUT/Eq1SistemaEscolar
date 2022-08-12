@@ -38,7 +38,7 @@
                     <tr>
                         <input type = "hidden" name ="tfCodigo_productoOld" value="<%=producto.getCodigo_producto()%>">
                         
-                        <td><input type="text"   name="tfCodigo_Producto"       value="<%=producto.getCodigo_producto()%>"    size="11" maxlength="11"/></td>
+                        <td><input type="text"   name="tfCodigo_producto"       value="<%=producto.getCodigo_producto()%>"    size="11" maxlength="11"/></td>
                         <td><input type="text"   name="tfNombre"                value="<%=producto.getNombre()%>"           size="15"                 /></td>
                         <td><input type="text"   name="tfPrecio"                value="<%=producto.getPrecio()%>"        size="15"                    /></td>
                         <td><input type="text"   name="tfCodigo_fabricante"     value="<%=producto.getCodigo_fabricante()%>"     size="30"              ></td>

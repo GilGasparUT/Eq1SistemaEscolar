@@ -1,17 +1,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.Cliente"%>
 <%@page import="dao.DAOCliente"%>
+<%@page import="servlets.SVista"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="estilos.css">
+        <link rel="stylesheet" href="vistas/estilos.css">
+        <link rel="stylesheet" href="Source Packages/SVista.java">
         <title>Cliente</title>
     </head>
     <body>
         <h1>Listado_Clientes</h1>
-        <div>
+        <div id="nuevocliente">
             <a href="SCliente?accion=nuevo"><button>Nuevo</button>  </a>
         </div>
         

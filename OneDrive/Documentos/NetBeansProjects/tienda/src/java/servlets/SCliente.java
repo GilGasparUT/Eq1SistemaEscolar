@@ -27,10 +27,11 @@ public class SCliente extends HttpServlet
             throws ServletException, IOException 
     {
         response.setContentType("text/html;charset=UTF-8");
+       
         
-        mostrar = "/vistas/mostrarcliente.jsp";
-        nuevo = "/vistas/nuevocliente.jsp";
-        editar = "/vistas/editarcliente.jsp";
+        mostrar = "vistas/mostrarcliente.jsp";
+        nuevo   = "vistas/nuevocliente.jsp";
+        editar  = "vistas/editarcliente.jsp";
         
         accion = request.getParameter("accion");
         
@@ -46,7 +47,7 @@ public class SCliente extends HttpServlet
             cliente.setRFC(request.getParameter("tfRFC"));
             cliente.setNombre(request.getParameter("tfNombre"));
             cliente.setApellidos(request.getParameter("tfApellidos"));
-            cliente.setTelefono(Integer.parseInt(request.getParameter("tfTelefono")));
+            cliente.setTelefono(request.getParameter("tfTelefono"));
             
             
             daoCliente = new DAOCliente();
@@ -75,7 +76,7 @@ public class SCliente extends HttpServlet
             cliente.setRFC(request.getParameter("tfRFC"));
             cliente.setNombre(request.getParameter("tfNombre"));
             cliente.setApellidos(request.getParameter("tfApellidos"));
-            cliente.setTelefono(Integer.parseInt(request.getParameter("tfTelefono")));
+            cliente.setTelefono(request.getParameter("tfTelefono"));
             
            
             
@@ -99,6 +100,7 @@ public class SCliente extends HttpServlet
         }
         
         request.getRequestDispatcher(acceso).forward(request, response);
+        
 
     }
 
@@ -115,6 +117,7 @@ public class SCliente extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**

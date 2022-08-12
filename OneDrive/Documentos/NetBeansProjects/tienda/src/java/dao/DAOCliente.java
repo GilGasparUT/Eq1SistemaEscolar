@@ -27,9 +27,9 @@ public class DAOCliente
         {
          
          
-            con = ConexionMySQL.getConnection(); //Conectar a la BD
+            con = ConexionMySQL.getConnection(); 
             ps=con.prepareStatement(sql);
-            rs=ps.executeQuery(); //ejecutar consulta y obtener resultados
+            rs=ps.executeQuery(); 
             while(rs.next())
             {
                 cliente=new Cliente();
@@ -37,7 +37,7 @@ public class DAOCliente
                 cliente.setRFC(rs.getString("RFC"));
                 cliente.setNombre(rs.getString("Nombre"));
                 cliente.setApellidos(rs.getString("Apellidos"));
-                cliente.setTelefono(rs.getInt("Telefono"));
+                cliente.setTelefono(rs.getString("Telefono"));
                 
                 listaClientes.add(cliente);
             }
@@ -55,13 +55,13 @@ public class DAOCliente
     
     public boolean agregar(Cliente cliente)
     {
-        String sql = "INSERT INTO clientes VALUES('" + cliente.getId_cliente()+"','" +
-                cliente.getRFC() + "','" +
-                cliente.getNombre() + "','" +
-                cliente.getApellidos() +"',"+
-                cliente.getTelefono() + ")";
-        
-        try 
+        String sql = "INSERT INTO clientes VALUES('" + 
+                cliente.getId_cliente() +"','"+
+                cliente.getRFC() +"','"+
+                cliente.getNombre() +"','"+
+                cliente.getApellidos() +"','"+
+                cliente.getTelefono() +"')";
+       try 
         {
             con = ConexionMySQL.getConnection();
             ps = con.prepareStatement(sql);
@@ -95,10 +95,8 @@ public class DAOCliente
                 cliente.setRFC(rs.getString("RFC"));
                 cliente.setNombre(rs.getString("Nombre"));
                 cliente.setApellidos(rs.getString("Apellidos"));
-                cliente.setTelefono(rs.getInt("Telefono"));
-                
-                
-                
+                cliente.setTelefono(rs.getString("Telefono"));
+       
             }
             rs.close();
             ps.close();
@@ -116,11 +114,11 @@ public class DAOCliente
     public boolean actualizar(Cliente cliente,String old)
     {
     String sql = "UPDATE clientes SET "+
-                 "Id_cliente= '" + cliente.getId_cliente() + "', " +
-                 "RFC       = '" + cliente.getRFC()    + "', " +
-                 "Nombre    = '" + cliente.getNombre() + "', " +
-                 "Apellidos = "  + cliente.getApellidos() + ",  " +
-                 "Telefono  = "  + cliente.getTelefono()  + ",  " +
+                 "Id_cliente = '" + cliente.getId_cliente() + "', " +
+                 "RFC        = '" + cliente.getRFC()    + "', " +
+                 "Nombre     = '" + cliente.getNombre() + "', " +
+                 "Apellidos  = '"  + cliente.getApellidos() + "', " +
+                 "Telefono   = '"  + cliente.getTelefono()  + "' " +
                  "WHERE Id_cliente = '" + old + "'";
          try 
         {

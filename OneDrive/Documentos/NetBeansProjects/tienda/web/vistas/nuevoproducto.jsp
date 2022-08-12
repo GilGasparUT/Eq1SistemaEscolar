@@ -8,7 +8,7 @@
     </head>
     <body>
     <div>
-           <h1>Registar_nuevoProducto</h1>
+           <h1>Registar_NuevoProducto</h1>
            <form action="SProducto" method="POST">
             <table>
                 <thead>
@@ -22,12 +22,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text"   name="tfCodigo_producto"   value="" size="11" maxlength="11"/></td>
-                        <td><input type="text"   name="tfNombre"            value="" size="11"                /></td>
+                        <td><input type="text"   name="tfCodigo_producto"   value="" size="5" maxlength="11"/></td>
+                        <td><input type="text"   name="tfNombre"            value="" size="25"                /></td>
                         <td><input type="text"   name="tfPrecio"            value="" size="15"               /></td>
-                        <td><input type="text"   name="tfCodigo_fabricante" value="" size="30"               /></td>
-                        <td><input type="submit" name="accion"      value="Agregar"                  /></td>  
-                        <td><a href="SProducto"><button>Regresar</button></a>                                           </td>
+                        <td><input type="text"   name="tfCodigo_fabricante" value="" size="5"               /></td>
+                        <td><input type="submit" name="accion"      value="Agregar"/></td>  
+                        <td><a href="SProducto"><button>Regresar</button></a></td>
                     </tr>
                 </tbody>
             </table>

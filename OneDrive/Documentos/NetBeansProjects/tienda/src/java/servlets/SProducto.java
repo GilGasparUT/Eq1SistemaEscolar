@@ -29,9 +29,9 @@ public class SProducto extends HttpServlet
     {
         response.setContentType("text/html;charset=UTF-8");
         
-        mostrar = "/vistas/mostrarproducto.jsp";
-        nuevo = "/vistas/nuevoproducto.jsp";
-        editar = "/vistas/editarproducto.jsp";
+        mostrar = "vistas/mostrarproducto.jsp";
+        nuevo   = "vistas/nuevoproducto.jsp";
+        editar  = "vistas/editarproducto.jsp";
         
         accion = request.getParameter("accion");
         
@@ -43,11 +43,12 @@ public class SProducto extends HttpServlet
         else if(accion != null && accion.equalsIgnoreCase("agregar"))
         {
             producto = new Producto();
-            producto.setCodigo_producto(request.getParameter("tfCodigo_Producto"));
+            producto.setCodigo_producto(request.getParameter("tfCodigo_producto"));
             producto.setNombre(request.getParameter("tfNombre"));
             producto.setPrecio(Double.parseDouble(request.getParameter("tfPrecio")));
             producto.setCodigo_fabricante(request.getParameter("tfCodigo_fabricante"));
-                       
+            
+            
             daoProducto = new DAOProducto();
             daoProducto.agregar(producto);
             
@@ -74,6 +75,7 @@ public class SProducto extends HttpServlet
             producto.setNombre(request.getParameter("tfNombre"));
             producto.setPrecio(Double.parseDouble(request.getParameter("tfPrecio")));
             producto.setCodigo_fabricante(request.getParameter("tfCodigo_fabricante"));
+                  
             
             daoProducto= new DAOProducto();
             daoProducto.actualizar(producto, codigo_productoOld);

@@ -9,18 +9,17 @@ public class Cliente
     private String RFC;
     private String Nombre;
     private String Apellidos;
-    private int Telefono;
+    private String Telefono;
     
     
     
     public Cliente() 
     {
-        Telefono= 0;
-       Id_cliente =  RFC = Nombre = Apellidos = "";
+      
+      Id_cliente =  RFC = Nombre = Apellidos = Telefono =  "";
         
     }
-    public Cliente(String RFC, String Nombre, String Apellidos,
-            String Id_cliente, int Telefono) 
+    public Cliente(String Id_cliente, String RFC, String Nombre, String Apellidos, String Telefono) 
     {
         this.Id_cliente= Id_cliente;
         this.RFC = RFC;
@@ -62,11 +61,11 @@ public class Cliente
         this.Apellidos = Apellidos;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return Telefono;
     }
 
-    public void setTelefono(int Telefono) {
+    public void setTelefono(String Telefono) {
         this.Telefono = Telefono;
     }
 

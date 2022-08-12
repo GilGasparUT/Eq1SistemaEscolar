@@ -7,12 +7,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="estilos.css">
+        <link rel="stylesheet" href="vistas/estilos.css">
         <title>Cliente</title>
     </head>
     <body>
         <h1>Listado_Productos</h1>
-        <div>
+        <div id="nuevoproducto">
             <a href="SProducto?accion=nuevo"><button>Nuevo</button>  </a>
         </div>
         

@@ -12,6 +12,10 @@
         <servlet-name>SProducto</servlet-name>
         <servlet-class>servlets.SProducto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SVista</servlet-name>
+        <servlet-class>servlets.SVista</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SCliente</servlet-name>
         <url-pattern>/SCliente</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>SProducto</servlet-name>
         <url-pattern>/SProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SVista</servlet-name>
+        <url-pattern>/SVista</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

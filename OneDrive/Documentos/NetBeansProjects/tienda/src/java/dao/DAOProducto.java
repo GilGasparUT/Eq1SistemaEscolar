@@ -28,17 +28,17 @@ public class DAOProducto
         {
          
          
-            con = ConexionMySQL.getConnection(); //Conectar a la BD
+            con = ConexionMySQL.getConnection(); 
             ps=con.prepareStatement(sql);
-            rs=ps.executeQuery(); //ejecutar consulta y obtener resultados
+            rs=ps.executeQuery(); 
             while(rs.next())
             {
                 producto=new Producto();
                 producto.setCodigo_producto(rs.getString("Codigo_producto"));
                 producto.setNombre(rs.getString("Nombre"));
                 producto.setPrecio(rs.getDouble("Precio"));
-                producto.setCodigo_producto(rs.getString("Codigo_producto"));
-                    
+                producto.setCodigo_fabricante(rs.getString("Codigo_fabricante"));
+                
                 listaProductos.add(producto);
             }
             rs.close();
@@ -55,13 +55,13 @@ public class DAOProducto
     
     public boolean agregar(Producto producto)
     {
-        String sql = "INSERT INTO producto VALUES('" + producto.getCodigo_producto()+"','" +
-                producto.getNombre() + "','" +
-                producto.getPrecio() + "','" +
-                producto.getCodigo_fabricante() + ")";
-               
-        
-        try 
+        String sql = "INSERT INTO producto VALUES('" + 
+                producto.getCodigo_producto() +"','"+
+                producto.getNombre() +"','"+
+                producto.getPrecio() +"','"+
+                producto.getCodigo_fabricante() +"')";
+           
+       try 
         {
             con = ConexionMySQL.getConnection();
             ps = con.prepareStatement(sql);
@@ -82,7 +82,7 @@ public class DAOProducto
     
     public Producto buscar (String codigo_producto)
     {
-        String sql = "SELECT * FROM producto WHERE Id_cliente='"+codigo_producto+"'";
+        String sql = "SELECT * FROM producto WHERE Codigo_producto='"+codigo_producto+"'";
          try 
         {
             con = ConexionMySQL.getConnection(); 
@@ -95,7 +95,8 @@ public class DAOProducto
                 producto.setNombre(rs.getString("Nombre"));
                 producto.setPrecio(rs.getDouble("Precio"));
                 producto.setCodigo_fabricante(rs.getString("Codigo_fabricante"));
-    
+               
+       
             }
             rs.close();
             ps.close();
@@ -103,7 +104,7 @@ public class DAOProducto
         } 
         catch (SQLException ex) 
         {
-            Logger.getLogger(DAOCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return producto;
@@ -113,11 +114,12 @@ public class DAOProducto
     public boolean actualizar(Producto producto,String old)
     {
     String sql = "UPDATE producto SET "+
-                 "Codigo_producto= '" + producto.getCodigo_producto() + "', " +
-                 "Nombre     = '" + producto.getNombre()    + "', " +
-                 "Precio    = '" + producto.getPrecio() + "', " +
-                 "Codigo_fabricante = "  + producto.getCodigo_fabricante() + ",  " +
-                 "WHERE Codigo_producto = '" + old + "'";
+                 "Codigo_producto = '" + producto.getCodigo_producto() +"',"+
+                 "Nombre        = '" + producto.getNombre()    +"',"+
+                 "Precio     = '" + producto.getPrecio() +"',"+
+                 "Codigo_fabricante  = '"  + producto.getCodigo_fabricante() + "' " +
+                 " WHERE Codigo_producto = '" + old + "'";
+    
          try 
         {
             con = ConexionMySQL.getConnection(); 
@@ -138,7 +140,7 @@ public class DAOProducto
 
     public boolean eliminar(String codigo_producto)
     {
-       String sql = "DELETE FROM producto WHERE Id_cliente ='" + codigo_producto + "'";   
+       String sql = "DELETE FROM producto WHERE Codigo_producto ='" + codigo_producto + "'";   
                  
        
        try 

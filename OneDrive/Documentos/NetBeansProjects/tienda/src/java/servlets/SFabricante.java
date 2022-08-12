@@ -28,9 +28,9 @@ public class SFabricante extends HttpServlet
     {
         response.setContentType("text/html;charset=UTF-8");
         
-        mostrar = "/vistas/mostrarfabricante.jsp";
-        nuevo = "/vistas/nuevofabricante.jsp";
-        editar = "/vistas/editarfabricante.jsp";
+        mostrar = "vistas/mostrarfabricante.jsp";
+        nuevo = "vistas/nuevofabricante.jsp";
+        editar = "vistas/editarfabricante.jsp";
         
         accion = request.getParameter("accion");
         
@@ -43,8 +43,8 @@ public class SFabricante extends HttpServlet
         {
             fabricante = new Fabricante();
             fabricante.setCodigo_fabricante(request.getParameter("tfCodigo_fabricante"));
-            fabricante.setRFC(request.getParameter("tfRFC"));
             fabricante.setNombre(request.getParameter("tfNombre"));
+            fabricante.setRFC(request.getParameter("tfRFC"));
         
             daoFabricante = new DAOFabricante();
             daoFabricante.agregar(fabricante);
