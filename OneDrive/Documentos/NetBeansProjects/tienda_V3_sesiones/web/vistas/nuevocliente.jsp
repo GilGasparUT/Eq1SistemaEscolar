@@ -1,6 +1,7 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
+
 <%  String usuario = (String) request.getSession().getAttribute("usuario");
     if (usuario==null)
     response.sendRedirect("SIndex");
@@ -12,9 +13,12 @@
         <title>NuevoCliente</title>
     </head>
     <body>
-        <header class="header"></header>
+        <div id="container">
+            <%@include file="header.jsp"%>
+        </div>
     <div>
            <h1>Nuevo_Cliente</h1>
+           
            <form action="SCliente" method="POST">
             <table>
                 <thead>

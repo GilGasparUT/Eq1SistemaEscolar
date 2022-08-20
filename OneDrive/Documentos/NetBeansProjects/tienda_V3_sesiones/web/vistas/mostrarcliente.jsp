@@ -4,6 +4,7 @@
 <%@page import="servlets.SVista"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <%  String usuario = (String) request.getSession().getAttribute("usuario");
     if (usuario==null)
     response.sendRedirect("SIndex");
@@ -16,7 +17,9 @@
         <title>MostrarCliente</title>
     </head>
     <body>
-        <header class="header"></header>
+        <div id="container">
+            <%@include file="header.jsp"%>
+        </div>
         
         <form id="frmCliente" action="SCliente" method="POST">
             
@@ -24,7 +27,8 @@
             
             <div id="nuevocliente">
             <!---<a href="SCliente?accion=nuevo"><button>Nuevo</button>  </a>-->
-            <a href="#" onclick="procesar('nuevo','')">Nuevo</a>
+            <a href="#" onclick="procesar('nuevo','')"><button>Nuevo</button></a>
+           
            </div>
             
              <div>
@@ -55,12 +59,12 @@
                         <td><%=cliente.getTelefono()%></td>
                         
                         <td>
-                            <a href="#" onclick="procesar('editar','<%=cliente.getId_cliente()%>')">Editar</a>
+                            <a href="#" onclick="procesar('editar','<%=cliente.getId_cliente()%>')"><button>Editar</button></a>
                             <%-- <a href="SCliente?accion=editar&id_cliente=<%=cliente.getId_cliente()%>"><button>Editar</button></a> --%>
                         </td>
                         
                         <td>
-                            <a href="#" onclick="procesar('eliminar','<%=cliente.getId_cliente()%>')">Eliminar</a>
+                            <a href="#" onclick="procesar('eliminar','<%=cliente.getId_cliente()%>')"><button>Eliminar</button></a>
                             <%--<a href="SCliente?accion=eliminar&id_cliente=<%=cliente.getId_cliente()%>"><button>Eliminar</button></a>--%>
                         </td>
                     </tr>

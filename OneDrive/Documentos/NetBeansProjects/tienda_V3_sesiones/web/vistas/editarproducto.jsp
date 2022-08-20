@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="vistas/estilos.css">
     <title>EditarProducto</title>
 </head>
-<header class="header"></header>
+        <div id="container">
+            <%@include file="header.jsp"%>
+        </div>
    
     
               <% 
@@ -25,6 +27,7 @@
               
         <div>
             <h1>Editar_producto</h1>
+            <a id= "btnRegresar" href="SProducto">Regresar</a>
             <form action="SProducto" method="POST">
             <table>
                 <thead>

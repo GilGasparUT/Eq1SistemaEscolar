@@ -12,9 +12,12 @@
         <title>Nuevofabricante</title>
     </head>
     <body>
-        <header class="header"></header>
+        <div id="container">
+            <%@include file="header.jsp"%>
+        </div>
     <div>
            <h1>Registar_nuevoFabricante</h1>
+           
            <form action="SFabricante" method="POST">
             <table>
                 <thead>

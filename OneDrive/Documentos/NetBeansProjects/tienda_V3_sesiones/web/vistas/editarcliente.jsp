@@ -16,10 +16,13 @@
     <link rel="stylesheet" href="vistas/estilos.css">
     
     <title>EditarCLiente</title>
-    </head>
-    </head>
+    
+ </head>
+   
     <body>
-        <header class="header"></header>
+        <div id="container">
+            <%@include file="header.jsp"%>
+        </div>
               <% 
                     DAOCliente dao    = new DAOCliente();
                     Cliente cliente    = new Cliente();
@@ -28,6 +31,7 @@
               %>
         <div>
             <h1>Editar_Cliente</h1>
+            <a id= "btnRegresar" href="SCliente">Regresar</a>
             <form action="SCliente" method="POST">
             <table>
                 <thead>

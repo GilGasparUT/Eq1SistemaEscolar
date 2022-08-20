@@ -15,7 +15,9 @@
         <title>MostrarFabricante</title>
     </head>
     <body>
-        <header class="header"></header>
+        <div id="container">
+            <%@include file="header.jsp"%>
+        </div>
         
     <form id="frmFabricante" action="SFabricante" method="POST">
         
@@ -23,7 +25,8 @@
         
         <div id="nuevofabricante">
             <!---<a href="SFabricante?accion=nuevo"><button>Nuevo</button></a>-->
-            <a href="#" onclick="procesar('nuevo','')">Nuevo</a>
+            <a href="#" onclick="procesar('nuevo','')"><button>Nuevo</button></a>
+            
         </div>
         
         <div>
@@ -51,12 +54,12 @@
                         <td><%=fabricante.getRFC()%></td>
                         
                         <td>
-                            <a href="#" onclick="procesar('editar','<%=fabricante.getCodigo_fabricante()%>')">Editar</a>
+                            <a href="#" onclick="procesar('editar','<%=fabricante.getCodigo_fabricante()%>')"><button>Editar</button></a>
                             <%--<a href="SFabricante?accion=editar&codigo_fabricante=<%=fabricante.getCodigo_fabricante()%>"><button>Editar</button></a>--%>
                         </td>
                         
                         <td>
-                            <a href="#" onclick="procesar('eliminar','<%=fabricante.getCodigo_fabricante()%>')">Eliminar</a>
+                            <a href="#" onclick="procesar('eliminar','<%=fabricante.getCodigo_fabricante()%>')"><button>Eliminar</button></a>
                             <%--<a href="SFabricante?accion=eliminar&codigo_fabricante=<%=fabricante.getCodigo_fabricante()%>"><button>Eliminar</button></a>--%>
                         </td>
                     </tr>

@@ -15,13 +15,16 @@
         <title>MostrarCliente</title>
     </head>
     <body>
-        <header class="header"></header>
+       <div id="container">
+            <%@include file="header.jsp"%>
+        </div>
     <form id="frmProducto" action="SProducto" method="POST">
         <h1>Listado_Productos</h1>
         
         <div id="nuevoproducto">
-            <a href="#" onclick="procesar('nuevo','')">Nuevo</a>
+            <a href="#" onclick="procesar('nuevo','')"><button>Nuevo</button></a>
             <!---<a href="SProducto?accion=nuevo"><button>Nuevo</button>  </a>-->
+            
         </div>
         
         <div>
@@ -52,11 +55,11 @@
                         <td><%=producto.getCodigo_fabricante()%></td>
                         
                         <td>
-                            <a href="#" onclick="procesar('editar','<%=producto.getCodigo_producto()%>')">Editar</a>
+                            <a href="#" onclick="procesar('editar','<%=producto.getCodigo_producto()%>')"><button>Editar</button></a>
                             <%-- <a href="SProducto?accion=editar&codigo_producto=<%=producto.getCodigo_producto()%>"><button>Editar</button></a>--%>
                         </td>
                         <td>
-                            <a href="#" onclick="procesar('eliminar','<%=producto.getCodigo_producto()%>')">Eliminar</a>
+                            <a href="#" onclick="procesar('eliminar','<%=producto.getCodigo_producto()%>')"><button>Eliminar</button></a>
                             <%-- <a href="SProducto?accion=eliminar&codigo_producto=<%=producto.getCodigo_producto()%>"><button>Eliminar</button></a>--%>
                         </td>
                     </tr>

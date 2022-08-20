@@ -12,8 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="vistas/estilos.css">
     <title>EditarFabricante</title>
+    
 </head>
-<header class="header"></header>
+        <div id="container">
+            <%@include file="header.jsp"%>
+        </div>
+
    
     
               <% 
@@ -25,6 +29,7 @@
               
         <div>
             <h1>Editar_Fabricante</h1>
+            <a id= "btnRegresar" href="SFabricante">Regresar</a>
             <form action="SFabricante" method="POST">
             <table>
                 <thead>

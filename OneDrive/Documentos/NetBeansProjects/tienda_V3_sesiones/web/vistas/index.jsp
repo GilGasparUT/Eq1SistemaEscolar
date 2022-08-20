@@ -14,12 +14,12 @@
             <div id="div1" > 
                  <img src ="img/logotienda.png" align="center" id="logo">
 
-                 <form action="SSesion" method="POST">
-                     <input type="text" name="tfUsuario" placeholder="usuario">
+                 <form id="login"   action="SSesion" method="POST">
+                     <input id="input" type="text" name="tfUsuario" placeholder="usuario">
                      <br>
-                     <input type="password" name="tfPassword" placeholder="Contraseña">
+                     <input id="input" type="password" name="tfPassword" placeholder="Contraseña">
                      <br>
-                     <input type="submit" name="btnSesion" value="Iniciar sesion">
+                     <input id="input" type="submit" name="btnSesion" value="Iniciar sesion">
                  </form>
              </div> 
         
