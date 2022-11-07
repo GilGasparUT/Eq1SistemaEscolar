@@ -1,0 +1,79 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: Century Gothic; 
+	text-align: center;
+	color: grey;
+}
+
+body
+{
+	background-color: #F4F4F4;
+}
+
+
+#contenedor
+{
+	width: 1200px;
+	margin:auto;
+}
+
+#encabezado
+{
+	height: 120px;
+	background-color: green;
+       	line-height: 120px;
+        font-size: 25px;
+}
+
+main 
+{
+        width: 1200px;
+	height: 400px;
+	background-color: green;
+       
+	
+}
+.inicioSesion
+{
+  margin-top:40px;
+}
+
+.form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:black;
+}
+
+.form input {
+  width: 300px;
+  height: 30px;
+  color: black;
+}
+
+.form button {
+  padding: 0.5em 1em;
+  border: none;
+}
+
+
+
+#pie
+{
+	clear: both;
+	height: 125px;
+	background-color: orange;
+	line-height: 120px;
+}
+
+#pie2
+{
+	clear: both;
+	height: 120px;
+	background-color: green;
+	line-height: 120px;
+}
