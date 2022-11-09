@@ -33,7 +33,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">
+          <a href="SSalir" class="dropdown-item dropdown-footer">
           <img src="./recursos/internos/img/icon/out.png" alt="" width="20" height="20">Cerrar Sesion</a>
     </ul>
   </nav>
@@ -59,56 +59,60 @@
                   <p>Alumnos</p>
                 </a>
               </li>
-
-
+               
+              
               <li class="nav-item">
-                <a href="./inscripciones/mostrar.jsp" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inscripciones</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="./profesores/mostrar.jsp" class="nav-link">
+                <a href="SProfesor" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Profesores</p>
                 </a>
               </li>
               
+              
               <li class="nav-item">
-                <a href="./carreras/mostrar.jsp" class="nav-link">
+                <a href="SCarrera" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Carreras</p>
                 </a>
               </li>
               
+              
               <li class="nav-item">
-                <a href="./materias/mostrar.jsp" class="nav-link">
+                <a href="SMateria" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Materias</p>
                 </a>
               </li>
-                            
+              
               <li class="nav-item">
-                <a href="./grupos/mostrar.jsp"class="nav-link">
+                <a href="SGrupoo"class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Grupos</p>
                 </a>
               </li>
               
-              <li class="nav-item">
-                <a href="./turnos/mostrar.jsp"class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Turnos</p>
-                </a>
-              </li>
               
               <li class="nav-item">
-                <a href="./calificaciones/mostrar.jsp" class="nav-link">
+                <a href="SCalificacion" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Calificaciones</p>
                 </a>
               </li>
+                                        
+              <li class="nav-item">
+                <a href="SAsignacion"class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Asignaciones</p>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="SInscripcion" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Inscripciones</p>
+                </a>
+              </li>
+             
             </ul>
           </li>
         </ul>
@@ -183,7 +187,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <div class="float-right d-none d-sm-inline">
-      Anything you want
+     
     </div>
     <strong>Copyright &copy; 2022-2023 <a  >UTRNG</a>.</strong> All rights reserved.
   </footer>

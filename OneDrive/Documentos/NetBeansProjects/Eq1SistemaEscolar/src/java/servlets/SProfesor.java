@@ -1,83 +1,109 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
+
+import beans.Profesor;
+import dao.DAOProfesor;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author adria
- */
-public class SProfesor extends HttpServlet {
+public class SProfesor extends HttpServlet 
+{
+private String mostrar;
+private String nuevo;
+private String editar;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SProfesor</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SProfesor at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+private String accion;
+private String acceso;
+
+private Profesor profesor;
+private DAOProfesor daoProfesor;
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
+    { 
+       response.setContentType("text/html;charset=UTF-8");
+
+        mostrar = "vistas/profesores/mostrar.jsp";
+        nuevo   = "vistas/profesores/nuevo.jsp";
+        editar  = "vistas/profesores/editar.jsp";
+
+        accion = request.getParameter("tfAccion");
+
+        if (accion != null && accion.equalsIgnoreCase("nuevo"))
+        {
+            acceso = nuevo;
         }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
+       else if(accion != null && accion.equalsIgnoreCase("agregar"))
+        {
+            profesor = new Profesor();
+            profesor.setClaveempleado(request.getParameter("tfClaveEmpleado"));
+            profesor.setApellidos(request.getParameter("tfApellidos"));
+            profesor.setNombre(request.getParameter("tfNombre"));
+            profesor.setClavecarrera(request.getParameter("tfClaveCarrera"));
+            
+            daoProfesor = new DAOProfesor();
+            daoProfesor.agregar(profesor);
+
+            acceso = mostrar;
+        }
+
+         else if(accion != null && accion.equalsIgnoreCase("editar"))
+        {
+
+            request.setAttribute("claveempleado", request.getParameter("tfClaveEmpleado"));
+            acceso = editar;
+
+        }
+
+        else if(accion != null && accion.equalsIgnoreCase("actualizar"))
+        {
+            profesor = new Profesor();
+            String claveempleadoOld = request.getParameter("tfClaveEmpleadoOld");
+            profesor.setClaveempleado(request.getParameter("tfClaveEmpleado"));
+            profesor.setApellidos(request.getParameter("tfApellidos"));
+            profesor.setNombre(request.getParameter("tfNombre"));
+            profesor.setClavecarrera(request.getParameter("tfClaveCarrera"));
+
+            daoProfesor = new DAOProfesor();
+            daoProfesor.actualizar(profesor,claveempleadoOld);
+
+            acceso = mostrar;
+        }    
+
+        else if (accion != null && accion.equalsIgnoreCase("eliminar"))
+        {
+            String claveempleado = request.getParameter("tfClaveEmpleado");
+            daoProfesor = new DAOProfesor();
+            daoProfesor.eliminar(claveempleado);
+
+            acceso = mostrar;
+        } 
+
+        else 
+        {
+            acceso = mostrar;
+        }
+        request.getRequestDispatcher(acceso).forward(request, response);  
+}
+
+
+ @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
     @Override
     public String getServletInfo() {
         return "Short description";

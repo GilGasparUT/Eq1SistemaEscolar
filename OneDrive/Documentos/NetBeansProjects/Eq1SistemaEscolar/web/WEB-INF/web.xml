@@ -44,6 +44,14 @@
         <servlet-name>SIndex</servlet-name>
         <servlet-class>servlets.SIndex</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SGrupoo</servlet-name>
+        <servlet-class>servlets.SGrupoo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SSalir</servlet-name>
+        <servlet-class>servlets.SSalir</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SAlumno</servlet-name>
         <url-pattern>/SAlumno</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>SIndex</servlet-name>
         <url-pattern>/SIndex</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SGrupoo</servlet-name>
+        <url-pattern>/SGrupoo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SSalir</servlet-name>
+        <url-pattern>/SSalir</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

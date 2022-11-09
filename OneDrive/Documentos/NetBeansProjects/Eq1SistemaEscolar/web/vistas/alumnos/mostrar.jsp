@@ -32,7 +32,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">
+          <a href="SSalir" class="dropdown-item dropdown-footer">
           <img src="./recursos/internos/img/icon/out.png" alt="" width="20" height="20">Cerrar Sesion</a>
     </ul>
   </nav>
@@ -52,15 +52,17 @@
            <form id="frmAlumnos" action="SAlumno" method="POST">
           <a href="#" onclick="procesar('nuevo','')"><button class="btn btn-primary">Nuevo</button></a>
         <div>
-          <table  class="table table-bordered" id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
+          <table  class="table table-bordered" id="example" class="display" style="font-size:14px" style="width:100%">
+        <thead style="color:white;">
+            <tr  style="background-color:grey;">
                
                 <th class="text-center">Matricula</th>
+                <th class="text-center">Año</th>
                 <th class="text-center">CURP</th>
-                <th class="text-center">Nmbre del Alumno</th>
-                <th class="text-center">Fecha de Nacimiento</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">FechaNacimiento</th>
                 <th class="text-center">Sexo</th>
+                <th class="text-center">ClaveCarrera</th>
                 <th class="text-center">opciones</th>
             </tr>
         </thead>
@@ -77,10 +79,12 @@
                     %>
             <tr>
                 <td class="text-center"><%=alumno.getMatricula()%></td>
+                <td class="text-center"><%=alumno.getYear()%></td>
                 <td class="text-center"><%=alumno.getCurp()%></td>
-                <td><%=alumno.getNombre()%>&nbsp<%=alumno.getApellidos()%></td>
+                <td class="text-center"><%=alumno.getApellidos()%>&nbsp<%=alumno.getNombre()%></td>
                 <td class="text-center"><%=alumno.getFechanac()%></td>
                 <td class="text-center"><%=alumno.getSexo()%></td>
+                <td class="text-center"><%=alumno.getClavecarrera()%></td>
                 <td class="text-center">
                     <a class="btn btn-light" style="text-decoration: none;" href="#" onclick="procesar('editar','<%=alumno.getMatricula()%>')">
                     <img src="./recursos/internos/img/icon/editar.png"  alt="" width="30" height="30"></a>

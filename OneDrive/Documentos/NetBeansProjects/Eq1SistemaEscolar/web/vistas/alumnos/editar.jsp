@@ -31,105 +31,76 @@
 
  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="SPrincipal" class="nav-link">Principal</a>
-        </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-     <li class="nav-item">
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a  href="SAlumno" class="nav-link">Regresar</a>
       </li>
     </ul>
- </nav>
+    <ul class="navbar-nav ml-auto">
+          <div class="dropdown-divider"></div>
+          <a href="SSalir" class="dropdown-item dropdown-footer">
+          <img src="./recursos/internos/img/icon/out.png" alt="" width="20" height="20">Cerrar Sesion</a>
+    </ul>
+  </nav>
  
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="" class="brand-link">
+    <a href="SPrincipal" style="text-decoration: none;" class="brand-link">
       <img src="./recursos/internos/img/logos/logoUTRNG.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 100">
-      <span class="brand-text font-weight-light">UTRNG</span>
+      <span class="brand-text font-weight-light">Principal</span>
     </a>
-            
-    <div class="sidebar">
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Opcion
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <i class="far fa-circle nav-icon"></i>
-              </li>
-             </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
   </aside>
-
-
-  <div class="content-wrapper">
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-6">
-          <div class="col-sm-6">
+    
+    <div class="container px-4 px-lg-5">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-sm-center h-100">
+		    <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+		   <div class="text-center my-5">
+			<img src="./recursos/internos/img/icon/editar.png" alt="logo" width="50" height="50">
+                        <h1>Editar Alumno</h1>
+		  </div>
+                <div class="card shadow-lg">
+		   <div class="card-body p-5">
+                    <form action="SAlumno" method="POST">
+			  <input type = "hidden" name ="tfMatriculaOld" value="<%=alumno.getMatricula()%>">
+                          
+                          <label class="mb-2 text-muted">Matricula</label>
+			  <input type="text" name="tfMatricula"   value="<%=alumno.getMatricula()%>"maxlength="20" class="form-control">
+                          <br>
+                          <label class="mb-2 text-muted">Año</label>
+			  <input type="text" name="tfYear"           value="<%=alumno.getYear()%>"maxlength="20" class="form-control">
+                          <br>
+                          <label class="mb-2 text-muted">CURP</label>
+			  <input type="text" name="tfCURP"          value="<%=alumno.getCurp()%>"maxlength="20" class="form-control">
+                          <br>
+                          <label class="mb-2 text-muted">Apellidos</label>
+			  <input type="text" name="tfApellidos"     value="<%=alumno.getApellidos()%>"maxlength="20" class="form-control">
+                          <br>
+                          <label class="mb-2 text-muted">Nombre</label>
+			  <input type="text" name="tfNombre"        value="<%=alumno.getNombre()%>"maxlength="20" class="form-control">
+                          <br>
+                          <label class="mb-2 text-muted">Fecha Nacimiento</label>
+			  <input type="text" name="tfFechaNac"       value="<%=alumno.getFechanac()%>"maxlength="20" class="form-control">
+                          <br>
+                          <label class="mb-2 text-muted">Sexo</label>
+			  <input type="text" name="tfSexo"           value="<%=alumno.getSexo()%>"maxlength="20" class="form-control">
+                          <br>
+                          <label class="mb-2 text-muted">ClaveCarrera</label>
+			  <input type="text" name="tfClaveCarrera"   value="<%=alumno.getClavecarrera()%>"maxlength="20" class="form-control">
+                          <br>
+                             <button type="submit" name="tfAccion" value="Actualizar" class="btn btn-primary ms-auto">
+			       Actualizar
+			  </button>
+                          <a href="SAlumno"><button class="btn btn-primary ms-auto">
+			        Regresar
+			  </button></a>
+		  </form>
+                </div>
+             </div>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Cerrar Sesion</a></li>
-              <li class="breadcrumb-item active"></li>
-            </ol>
-          </div>
-          <div>
-               <h2>Editar Alumno</h2><br>
-            <form action="SAlumno" method="POST">
-                        <input type = "hidden" name ="tfMatriculaOld" value="<%=alumno.getMatricula()%>"> <!-- matricula original -->
-                        
-            Matricula:  <input type="text" name="tfMatricula"   value="<%=alumno.getMatricula()%>"       maxlength="20"/> <br>
-            CURP:       <input type="text" name="tfCURP"        value="<%=alumno.getCurp()%>"            maxlength="20"/><br>
-            Nombre:     <input type="text" name="tfNombre"      value="<%=alumno.getNombre()%>"          maxlength="20"/><br>
-            Apelidos:   <input type="text" name="tfApellidos"   value="<%=alumno.getApellidos()%>"       maxlength="20"/><br>
-            FechaNac:   <input type="text" name="tfFechaNac"    value="<%=alumno.getFechanac()%>"        maxlength="20"/><br>
-            Sexo:       <input type="text" name="tfSexo"        value="<%=alumno.getSexo()%>"            maxlength="20"/><br>
-                        <input type="submit" name="tfAccion"    value="Actualizar"/>
-                        <a href="SAlumno"><button>Regresar</button></a>
-            </form>
-        </div>
         </div>
       </div>
-    </div>
-
+    </section>
+  </div>   
     <div class="content">
       <div class="container-fluid">
         <div class="row">
@@ -137,7 +108,6 @@
       </div>
     </div>
   </div>
-
   <footer class="main-footer">
     <strong>Copyright &copy; 2022-2024 <a>Universidad Tecnologica</a>.</strong> All rights reserved.
   </footer>

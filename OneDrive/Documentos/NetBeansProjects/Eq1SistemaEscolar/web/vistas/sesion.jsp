@@ -22,6 +22,7 @@
                 </div>
             </div>
         </nav>
+        
         <div class="container px-4 px-lg-5">
 	<section class="h-100">
 		<div class="container h-100">
@@ -87,9 +88,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-   </div>
+            	</section>
+          </div>    
+   
+
         <footer class="py-5" style="background-color:#00675A;">
             <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; UTRNG 2022</p></div>
         </footer>

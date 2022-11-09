@@ -39,11 +39,13 @@ private DAOAlumno daoAlumno;
         {
             alumno = new Alumno();
             alumno.setMatricula(request.getParameter("tfMatricula"));
+            alumno.setYear(request.getParameter("tfYear"));
             alumno.setCurp(request.getParameter("tfCURP"));
-            alumno.setNombre(request.getParameter("tfNombre"));
             alumno.setApellidos(request.getParameter("tfApellidos"));
+            alumno.setNombre(request.getParameter("tfNombre"));
             alumno.setFechanac(request.getParameter("tfFechaNac"));
             alumno.setSexo(request.getParameter("tfSexo"));
+            alumno.setClavecarrera(request.getParameter("tfClaveCarrera"));
             
             daoAlumno = new DAOAlumno();
             daoAlumno.agregar(alumno);
@@ -64,11 +66,13 @@ private DAOAlumno daoAlumno;
             alumno = new Alumno();
             String matriculaOld = request.getParameter("tfMatriculaOld");
             alumno.setMatricula(request.getParameter("tfMatricula"));
+            alumno.setYear(request.getParameter("tfYear"));
             alumno.setCurp(request.getParameter("tfCURP"));
-            alumno.setNombre(request.getParameter("tfNombre"));
             alumno.setApellidos(request.getParameter("tfApellidos"));
+            alumno.setNombre(request.getParameter("tfNombre"));
             alumno.setFechanac(request.getParameter("tfFechaNac"));
             alumno.setSexo(request.getParameter("tfSexo"));
+            alumno.setClavecarrera(request.getParameter("tfClaveCarrera"));
             
             daoAlumno = new DAOAlumno();
             daoAlumno.actualizar(alumno,matriculaOld);

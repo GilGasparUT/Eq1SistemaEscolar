@@ -1,83 +1,115 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
+
+import beans.Calificacion;
+import dao.DAOCalificacion;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author adria
- */
-public class SCalificacion extends HttpServlet {
+public class SCalificacion extends HttpServlet 
+{
+private String mostrar;
+private String nuevo;
+private String editar;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SCalificacion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SCalificacion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+private String accion;
+private String acceso;
+
+private Calificacion calificacion;
+private DAOCalificacion daoCalificacion;
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
+    { 
+       response.setContentType("text/html;charset=UTF-8");
+      
+        mostrar = "vistas/calificaciones/mostrar.jsp";
+        nuevo   = "vistas/calificaciones/nuevo.jsp";
+        editar  = "vistas/calificaciones/editar.jsp";
+        
+        accion = request.getParameter("tfAccion");
+        
+        if (accion != null && accion.equalsIgnoreCase("nuevo"))
+        {
+            acceso = nuevo;
         }
-    }
+        
+       else if(accion != null && accion.equalsIgnoreCase("agregar"))
+        {
+            calificacion = new Calificacion();
+            calificacion.setClavecalificacion(request.getParameter("tfClaveCalificacion"));
+            calificacion.setP1(request.getParameter("tfP1"));
+            calificacion.setP2(request.getParameter("tfP2"));
+            calificacion.setP3(request.getParameter("tfP3"));
+            calificacion.setExtra(request.getParameter("tfExtra"));
+            calificacion.setClaveasignacion(request.getParameter("tfClaveAsignacion"));
+            calificacion.setClaveinscripcion(request.getParameter("tfClaveInscrpcion"));
+            
+            daoCalificacion = new DAOCalificacion();
+            daoCalificacion.agregar(calificacion);
+            
+            acceso = mostrar;
+        }
+        
+         else if(accion != null && accion.equalsIgnoreCase("editar"))
+        {
+            
+            request.setAttribute("clavecalificacion", request.getParameter("tfClaveCalificacion"));
+            acceso = editar;
+            
+        }
+        
+        else if(accion != null && accion.equalsIgnoreCase("actualizar"))
+        {
+            calificacion = new Calificacion();
+            String clavecalificacionOld = request.getParameter("tfClaveCalificacionOld");
+            calificacion.setClavecalificacion(request.getParameter("tfClaveCalificacion"));
+            calificacion.setP1(request.getParameter("tfP1"));
+            calificacion.setP2(request.getParameter("tfP2"));
+            calificacion.setP3(request.getParameter("tfP3"));
+            calificacion.setExtra(request.getParameter("tfExtra"));
+            calificacion.setClaveasignacion(request.getParameter("tfClaveAsignacion"));
+            calificacion.setClaveinscripcion(request.getParameter("tfClaveInscripcion"));
+            
+            daoCalificacion = new DAOCalificacion();
+            daoCalificacion.actualizar(calificacion,clavecalificacionOld);
+            
+            acceso = mostrar;
+        }    
+        
+        else if (accion != null && accion.equalsIgnoreCase("eliminar"))
+        {
+            String clavecalificacion = request.getParameter("tfClaveCalificacion");
+            daoCalificacion = new DAOCalificacion();
+            daoCalificacion.eliminar(clavecalificacion);
+            
+            acceso = mostrar;
+        } 
+        
+        else 
+        {
+            acceso = mostrar;
+        }
+        request.getRequestDispatcher(acceso).forward(request, response);  
+}
+    
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
+ @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+  
     @Override
     public String getServletInfo() {
         return "Short description";

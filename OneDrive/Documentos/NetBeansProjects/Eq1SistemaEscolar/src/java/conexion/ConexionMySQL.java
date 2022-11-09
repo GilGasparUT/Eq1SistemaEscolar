@@ -30,7 +30,7 @@ public class ConexionMySQL
         {
             Logger.getLogger(ConexionMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/ce_ia", "root","");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/controlescolareq1", "root","");
     }    
 }
 

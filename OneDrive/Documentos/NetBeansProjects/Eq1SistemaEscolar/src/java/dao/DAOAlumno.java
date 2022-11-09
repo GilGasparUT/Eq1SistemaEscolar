@@ -31,11 +31,13 @@ public class DAOAlumno
      {
          alumno=new Alumno();
          alumno.setMatricula(rs.getString("Matricula"));
+         alumno.setYear(rs.getString("Year"));
          alumno.setCurp(rs.getString("CURP"));
-         alumno.setNombre(rs.getString("Nombre"));
          alumno.setApellidos(rs.getString("Apellidos"));
+         alumno.setNombre(rs.getString("Nombre"));
          alumno.setFechanac(rs.getString("FechaNac"));
          alumno.setSexo(rs.getString("Sexo"));
+         alumno.setClavecarrera(rs.getString("ClaveCarrera"));
          
          listaAlumnos.add(alumno);
      }
@@ -54,11 +56,13 @@ public class DAOAlumno
  public boolean agregar(Alumno alumno)
     {
         String sql = "INSERT INTO alumnos VALUES('" + alumno.getMatricula()+"','" +
+                alumno.getYear()+"','"+
                 alumno.getCurp()+"','"+
-                alumno.getNombre()+"','"+
                 alumno.getApellidos()+"','"+
+                alumno.getNombre()+"','"+
                 alumno.getFechanac()+"','"+
-                alumno.getSexo()+"')";
+                alumno.getSexo()+"','"+
+                alumno.getClavecarrera()+"')";
         
         try 
         {
@@ -91,11 +95,13 @@ public class DAOAlumno
             {
                 alumno = new Alumno();
                 alumno.setMatricula(rs.getString("Matricula"));
+                alumno.setYear(rs.getString("Year"));
                 alumno.setCurp(rs.getString("CURP"));
                 alumno.setNombre(rs.getString("Nombre"));
                 alumno.setApellidos(rs.getString("Apellidos"));
                 alumno.setFechanac(rs.getString("FechaNac"));
                 alumno.setSexo(rs.getString("Sexo"));
+                alumno.setClavecarrera(rs.getString("ClaveCarrera"));
             }
             rs.close();
             ps.close();
@@ -113,11 +119,13 @@ public class DAOAlumno
     {
     String sql = "UPDATE alumnos SET "+
                  "Matricula = '" + alumno.getMatricula() + "', " +
+                 "Year   = '" + alumno.getYear()    + "', " +
                  "CURP   = '" + alumno.getCurp()    + "', " +
-                 "Nombre = '" + alumno.getNombre() + "', " +
                  "Apellidos       = '"  + alumno.getApellidos() + "',  " +
+                 "Nombre = '" + alumno.getNombre() + "', " +
                  "FechaNac       = '"  + alumno.getFechanac()  + "',  " +
-                 "Sexo     = '"  + alumno.getSexo() + "'  " +
+                 "Sexo     = '"  + alumno.getSexo() + "',  " +
+                 "ClaveCarrera = '"+ alumno.getClavecarrera() +"' "+
                  "WHERE Matricula = '" + old + "'";
     
           try 
