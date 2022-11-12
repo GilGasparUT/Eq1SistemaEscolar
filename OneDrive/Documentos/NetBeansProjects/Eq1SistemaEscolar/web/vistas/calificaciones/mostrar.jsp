@@ -118,7 +118,7 @@
                         tfAccion.value = accion;
                         
                         var tfClaveCalificacion = document.createElement("input");
-                        tfClaveCalificacion.name = "tfMatricula";
+                        tfClaveCalificacion.name = "tfClaveCalificacion";
                         tfClaveCalificacion.type = "hidden";
                         tfClaveCalificacion.value = clavecalificacion;
                         

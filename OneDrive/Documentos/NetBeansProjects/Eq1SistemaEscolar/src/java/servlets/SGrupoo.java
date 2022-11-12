@@ -58,7 +58,7 @@ public class SGrupoo extends HttpServlet
         else if(accion != null && accion.equalsIgnoreCase("editar"))
         {
             
-            request.setAttribute("claveg", request.getParameter("tfClaveG"));
+            request.setAttribute("clavegrupo", request.getParameter("tfClaveGrupo"));
             acceso = editar;
             
         }
@@ -68,8 +68,8 @@ public class SGrupoo extends HttpServlet
         {
             
             grupo = new Grupo();
-            String clavegrupoOld = request.getParameter("tfClaveGrupoGOld");
-            grupo.setClavegrupo(request.getParameter("tfClaveG"));
+            String clavegrupoOld = request.getParameter("tfClaveGrupoOld");
+            grupo.setClavegrupo(request.getParameter("tfClaveGrupo"));
             grupo.setSemestre(request.getParameter("tfSemestre"));
             grupo.setLetra(request.getParameter("tfLetra"));
             grupo.setYear(request.getParameter("tfYear"));

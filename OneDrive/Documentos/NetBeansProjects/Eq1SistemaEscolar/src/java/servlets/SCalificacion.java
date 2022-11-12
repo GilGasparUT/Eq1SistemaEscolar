@@ -45,7 +45,7 @@ private DAOCalificacion daoCalificacion;
             calificacion.setP3(request.getParameter("tfP3"));
             calificacion.setExtra(request.getParameter("tfExtra"));
             calificacion.setClaveasignacion(request.getParameter("tfClaveAsignacion"));
-            calificacion.setClaveinscripcion(request.getParameter("tfClaveInscrpcion"));
+            calificacion.setClaveinscripcion(request.getParameter("tfClaveInscripcion"));
             
             daoCalificacion = new DAOCalificacion();
             daoCalificacion.agregar(calificacion);

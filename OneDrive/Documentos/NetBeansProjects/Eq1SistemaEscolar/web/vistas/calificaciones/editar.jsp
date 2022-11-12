@@ -75,6 +75,9 @@
                           <label class="mb-2 text-muted">Parcial 3</label>
 			  <input type="text" name="tfP3"     value="<%=calificacion.getP3()%>"maxlength="20" class="form-control">
                           <br>
+                          <label class="mb-2 text-muted">Extra</label>
+			  <input type="text" name="tfExtra"        value="<%=calificacion.getExtra()%>"maxlength="20" class="form-control">
+                          <br>
                           <label class="mb-2 text-muted">Clave_Asignacion</label>
 			  <input type="text" name="tfClaveAsignacion"        value="<%=calificacion.getClaveasignacion()%>"maxlength="20" class="form-control">
                           <br>

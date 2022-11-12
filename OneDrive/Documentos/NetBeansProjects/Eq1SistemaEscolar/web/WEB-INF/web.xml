@@ -52,6 +52,10 @@
         <servlet-name>SSalir</servlet-name>
         <servlet-class>servlets.SSalir</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SAsignacion</servlet-name>
+        <servlet-class>servlets.SAsignacion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SAlumno</servlet-name>
         <url-pattern>/SAlumno</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>SSalir</servlet-name>
         <url-pattern>/SSalir</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SAsignacion</servlet-name>
+        <url-pattern>/SAsignacion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

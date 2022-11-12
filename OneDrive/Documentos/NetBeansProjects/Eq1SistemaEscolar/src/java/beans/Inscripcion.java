@@ -12,7 +12,7 @@ public class Inscripcion
     public Inscripcion ()
     {
         
-        claveinscripcion=fechainscripcion=matricula=clavegrupo="";
+        claveinscripcion=fechainscripcion=clavegrupo=matricula="";
        
     }
     

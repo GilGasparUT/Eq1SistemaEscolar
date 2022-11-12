@@ -1,5 +1,6 @@
-<%@page import="java.util.ArrayList"%>
+
 <%@page import="beans.Inscripcion"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="dao.DAOInscripcion"%>
 <!DOCTYPE html>
 <%
@@ -32,7 +33,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">
+          <a href="SSalir" class="dropdown-item dropdown-footer">
           <img src="./recursos/internos/img/icon/out.png" alt="" width="20" height="20">Cerrar Sesion</a>
     </ul>
   </nav>
@@ -49,16 +50,16 @@
         <div class="row mb-5">
           
             
-           <form id="frmInscripciones" action="SInscripcion" method="POST">
+           <form id="frmInscripcion" action="SInscripcion" method="POST">
           <a href="#" onclick="procesar('nuevo','')"><button class="btn btn-primary">Nuevo</button></a>
         <div>
           <table  class="table table-bordered" id="example" class="display" style="font-size:14px" style="width:100%">
         <thead style="color:white;">
             <tr  style="background-color:grey;">
                
-                <th class="text-center">No.Inscripcion</th>
-                <th class="text-center">FechaInscripcion</th>
-                <th class="text-center">ClaveGrupo</th>
+                <th class="text-center">Clave_Inscripcion</th>
+                <th class="text-center">Fecha_Inscripcion</th>
+                <th class="text-center">Clave_Grupo</th>
                 <th class="text-center">Matricula</th>
                 <th class="text-center">opciones</th>
             </tr>
@@ -116,7 +117,7 @@
                         tfClaveInscripcion.value = claveinscripcion;
                         
                         
-                        var padre = document.getElementById("frmInscripciones");
+                        var padre = document.getElementById("frmInscripcion");
                         padre.appendChild(tfAccion);
                         padre.appendChild(tfClaveInscripcion);
                         

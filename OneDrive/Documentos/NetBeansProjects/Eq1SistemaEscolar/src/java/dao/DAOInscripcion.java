@@ -19,7 +19,7 @@ public class DAOInscripcion
     
  public ArrayList mostrar()  
  {
-     ArrayList<Inscripcion> listaInscripcion = new ArrayList<>();
+     ArrayList<Inscripcion> listaInscripciones = new ArrayList<>();
      String sql = "SELECT * FROM inscripciones";
      
      try 
@@ -35,7 +35,7 @@ public class DAOInscripcion
          inscripcion.setClavegrupo(rs.getString("ClaveGrupo"));
          inscripcion.setMatricula(rs.getString("Matricula"));
          
-         listaInscripcion.add(inscripcion);
+         listaInscripciones.add(inscripcion);
      }
      rs.close();
      ps.close();
@@ -47,7 +47,7 @@ public class DAOInscripcion
      Logger.getLogger(DAOInscripcion.class.getName()).log(Level.SEVERE, null,ex);
      }
      
-     return listaInscripcion;
+     return listaInscripciones;
  }
  public boolean agregar(Inscripcion inscripcion)
     {

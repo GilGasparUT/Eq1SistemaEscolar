@@ -62,7 +62,6 @@ public class DAOCalificacion
                 calificacion.getExtra()+"','"+
                 calificacion.getClaveasignacion()+"','"+
                 calificacion.getClaveinscripcion()+"')";
-        
         try 
         {
             con = ConexionMySQL.getConnection();

@@ -24,8 +24,8 @@
               <% 
                     DAOInscripcion dao    = new DAOInscripcion();
                     Inscripcion inscripcion    = new Inscripcion();
-                    String idins = request.getAttribute("idins").toString();
-                    inscripcion           = dao.buscar(idins);
+                    String claveinscripcion = request.getAttribute("claveinscripcion").toString();
+                    inscripcion           = dao.buscar(claveinscripcion);
               %>
 <div class="wrapper">
 
@@ -63,13 +63,13 @@
                     <form action="SInscripcion" method="POST">
 			  <input type = "hidden" name ="tfClaveInscripcionOld" value="<%=inscripcion.getClaveinscripcion()%>">
                           
-                          <label class="mb-2 text-muted">IdInscripcion</label>
-			  <input type="text" name="tfClaveInscripcion"   value="<%=inscripcion.getIdins()%>"maxlength="20" class="form-control">
+                          <label class="mb-2 text-muted">Clave_Inscripcion</label>
+			  <input type="text" name="tfClaveInscripcion"   value="<%=inscripcion.getClaveinscripcion()%>"maxlength="20" class="form-control">
                           <br>
-                          <label class="mb-2 text-muted">FechaInscripcion</label>
+                          <label class="mb-2 text-muted">Fecha_Inscripcion</label>
 			  <input type="text" name="tfFechaInscripcion"           value="<%=inscripcion.getFechainscripcion()%>"maxlength="20" class="form-control">
                           <br>
-                          <label class="mb-2 text-muted">ClaveGrupo</label>
+                          <label class="mb-2 text-muted">Clave_Grupo</label>
 			  <input type="text" name="tfClaveGrupo"          value="<%=inscripcion.getClavegrupo()%>"maxlength="20" class="form-control">
                           <br>
                           <label class="mb-2 text-muted">Matricula</label>
@@ -79,7 +79,7 @@
                              <button type="submit" name="tfAccion" value="Actualizar" class="btn btn-primary ms-auto">
 			       Actualizar
 			  </button>
-                          <a href="SAlumno"><button class="btn btn-primary ms-auto">
+                          <a href="SInscripcion"><button class="btn btn-primary ms-auto">
 			        Regresar
 			  </button></a>
 		  </form>
