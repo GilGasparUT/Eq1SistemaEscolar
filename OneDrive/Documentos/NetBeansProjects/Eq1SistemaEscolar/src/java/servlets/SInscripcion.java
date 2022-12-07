@@ -30,6 +30,11 @@ private DAOInscripcion daoInscripcion;
         
         accion = request.getParameter("tfAccion");
         
+        if(request.getParameter("btnBuscar")!=null)
+        {
+            request.setAttribute("matricula", request.getParameter("tfMatricula"));
+        }
+        
         if (accion != null && accion.equalsIgnoreCase("nuevo"))
         {
             acceso = nuevo;

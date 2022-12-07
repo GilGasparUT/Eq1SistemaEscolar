@@ -44,24 +44,23 @@
     </a>
   </aside>
     
-    <div class="container px-4 px-lg-5">
+    <div class="container px-4 px-lg-5 py-5" >
 	<section class="h-100">
 		<div class="container h-100">
-			<div class="row justify-content-sm-center h-100">
-		    <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-		   <div class="text-center my-5">
+		<div class="row justify-content-sm-center h-100">
+		    <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+		   <div class="text-center">
 			<img src="./recursos/internos/img/icon/editar.png" alt="logo" width="50" height="50">
                         <h1>Nuevo Alumno</h1>
 		  </div>
-                <div class="card shadow-lg">
+                <div class="card shadow-lg" >
 		   <div class="card-body p-5">
                     <form action="SAlumno" method="POST">
+                        <div>
                           <label class="mb-2 text-muted">Matricula</label>
 			  <input type="text" name="tfMatricula"   value=""    maxlength="20" class="form-control">
-                          <br>
                           <label class="mb-2 text-muted">Año</label>
 			  <input type="text" name="tfYear"   value=""    maxlength="20" class="form-control">
-                          <br>
                           <label class="mb-2 text-muted">CURP</label>
 			  <input type="text" name="tfCURP"        value=""    maxlength="20"class="form-control">
                           <br>
@@ -86,11 +85,12 @@
                           <a href="SAlumno"><button class="btn btn-primary ms-auto">
 			        Regresar
 			  </button></a>
+                        </div>
 		  </form>
-                </div>
              </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   </div>   

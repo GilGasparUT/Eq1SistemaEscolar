@@ -50,6 +50,41 @@ public class DAOProfesor
 
      return listaProfesor;
  }
+ 
+  public ArrayList mostrar(String claveCarrera)  
+ {
+     ArrayList<Profesor> listaProfesor = new ArrayList<>();
+     String sql = "SELECT * FROM profesores WHERE ClaveCarrera='"+claveCarrera+"'";
+
+     try 
+     {   
+         con = ConexionMySQL.getConnection();
+         ps=con.prepareStatement(sql);
+         rs=ps.executeQuery();
+         while(rs.next())
+     {
+         profesor=new Profesor();
+         profesor.setClaveempleado(rs.getString("ClaveEmpleado"));
+         profesor.setApellidos(rs.getString("Apellidos"));
+         profesor.setNombre(rs.getString("Nombre"));
+         profesor.setClavecarrera(rs.getString("ClaveCarrera"));
+         
+
+         listaProfesor.add(profesor);
+     }
+     rs.close();
+     ps.close();
+     con.close();
+     }
+
+    catch (SQLException ex)
+     {
+     Logger.getLogger(DAOProfesor.class.getName()).log(Level.SEVERE, null,ex);
+     }
+
+     return listaProfesor;
+ }
+  
  public boolean agregar(Profesor profesor)
     {
         String sql = "INSERT INTO profesores VALUES('" + profesor.getClaveempleado()+"','" +

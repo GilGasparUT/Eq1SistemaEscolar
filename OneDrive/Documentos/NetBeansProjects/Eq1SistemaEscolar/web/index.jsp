@@ -80,7 +80,7 @@
                     <div class="card h-100" style="border-color: #00675A;">
                         <div class="card-body">
                             <h2 class="card-title">Visión</h2>
-                            <p class="card-text" style="text-align: justify;">Ser en el año 2018, la institución de educación superior con mayor aceptación de profesionistas en el sector laboral en la zona de influencia, mediante una formación integral.</p>
+                            <p class="card-text" style="text-align: justify;">Ser en el año 2022, la institución de educación superior con mayor aceptación de profesionistas en el sector laboral en la zona de influencia, mediante una formación integral.</p>
                         </div>
                     </div>
                 </div>

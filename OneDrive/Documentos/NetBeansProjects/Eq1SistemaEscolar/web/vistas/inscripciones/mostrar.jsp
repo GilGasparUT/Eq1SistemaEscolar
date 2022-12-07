@@ -1,13 +1,31 @@
 
+<%@page import="beans.Alumno"%>
+<%@page import="dao.DAOAlumno"%>
 <%@page import="beans.Inscripcion"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.DAOInscripcion"%>
 <!DOCTYPE html>
-<%
-  String  usuario = (String) request.getSession().getAttribute("usuario");
-  if(usuario==null)
-  response.sendRedirect("SIndex");
-%>
+       <%
+            DAOInscripcion daoInscripcion = new DAOInscripcion();
+            Inscripcion inscripcion= new Inscripcion();
+            
+             DAOAlumno daoAlumno = new DAOAlumno();
+            Alumno alumno = new Alumno();
+            
+            String matricula =(String) request.getAttribute("matricula");
+            matricula = (matricula ==null) ? "" : matricula;
+            
+            ArrayList<Inscripcion>lista = daoInscripcion.mostrar(matricula);
+            ArrayList<Alumno>listMatricula = daoAlumno.mostrar();
+             ArrayList<Alumno>listAlumno = daoAlumno.mostrar();
+
+
+            
+        
+            String  usuario = (String) request.getSession().getAttribute("usuario");
+            if(usuario==null)
+            response.sendRedirect("SIndex");
+        %>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -47,9 +65,22 @@
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
+            <div class="row mb-5">
+              <form  action="SInscripcion" method="POST">
+                  <select id="cmbInscripcion" name="cmbInscripcion">
+                  <option disabled selected  value="">Elige un Alumno</option>
+                     <%
+                           for (int i=0; i<listMatricula.size(); i++){
+                               alumno = listMatricula.get(i);
+                         %>
+                         <option value="<%=alumno.getMatricula()%>"><%=alumno.getMatricula()%>-<%=alumno.getNombre()%></option>
+                     <%}%>
+                    </select>
+                    <input type="text" id="tfMatricula" name="tfMatricula" hidden="">
+                    <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
+               </form> 
+          </div>
         <div class="row mb-5">
-          
-            
            <form id="frmInscripcion" action="SInscripcion" method="POST">
           <a href="#" onclick="procesar('nuevo','')"><button class="btn btn-primary">Nuevo</button></a>
         <div>
@@ -60,26 +91,25 @@
                 <th class="text-center">Clave_Inscripcion</th>
                 <th class="text-center">Fecha_Inscripcion</th>
                 <th class="text-center">Clave_Grupo</th>
-                <th class="text-center">Matricula</th>
+                <th class="text-center">NombreAlumno</th>
                 <th class="text-center">opciones</th>
             </tr>
         </thead>
         <tbody>
              <% 
-                    DAOInscripcion daoInscripcion = new DAOInscripcion();
-                    ArrayList<Inscripcion> lista = daoInscripcion.mostrar();
+                    
                     
                    for (int i=0; i<lista.size(); i++) 
                    {
-                     Inscripcion inscripcion = new Inscripcion();
                      inscripcion = lista.get(i);
-                   
+                     alumno = listAlumno.get(i);
+                     
                     %>
             <tr>
                 <td class="text-center"><%=inscripcion.getClaveinscripcion()%></td>
                 <td class="text-center"><%=inscripcion.getFechainscripcion()%></td>
                 <td class="text-center"><%=inscripcion.getClavegrupo()%></td>
-                <td class="text-center"><%=inscripcion.getMatricula()%></td>
+                <td class="text-center"><%=alumno.getNombre()%>&nbsp<%=alumno.getApellidos()%></td>
                 <td class="text-center">
                     <a class="btn btn-light" style="text-decoration: none;" href="#" onclick="procesar('editar','<%=inscripcion.getClaveinscripcion()%>')">
                     <img src="./recursos/internos/img/icon/editar.png"  alt="" width="30" height="30"></a>
@@ -144,6 +174,8 @@
 <script src="./recursos/externos/DataTables/jquery.min.js"></script>
 <script src="./recursos/externos/Bootstrap5/bootstrap.bundle.js"></script>
 <script src="./recursos/externos/DataTables/datatables.min.js"></script>
+<script src="./recursos/internos/js/inscripciones.js"></script>
+
 </body>
 </html>
 
@@ -154,6 +186,7 @@
                 "searching": true,
                  "order": true,
                  "info": false,
+                 
 
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"

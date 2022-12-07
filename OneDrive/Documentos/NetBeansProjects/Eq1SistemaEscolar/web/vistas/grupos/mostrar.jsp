@@ -1,13 +1,37 @@
 
+<%@page import="dao.DAOCarrera"%>
+<%@page import="beans.Carrera"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.DAOGrupo"%>
 <%@page import="beans.Grupo"%>
 <!DOCTYPE html>
-<%
-  String  usuario = (String) request.getSession().getAttribute("usuario");
-  if(usuario==null)
-  response.sendRedirect("SIndex");
-%>
+        <%
+            DAOGrupo daoGrupo = new DAOGrupo();
+            Grupo grupo = new Grupo();
+            
+            
+            String claveCarrera =(String) request.getAttribute("claveCarrera");
+            String year =(String) request.getAttribute("year");
+            String semestre =(String) request.getAttribute("semestre");
+            
+            claveCarrera = (claveCarrera ==null) ? "" : claveCarrera;
+            year = (year ==null) ? "" : year;
+            semestre = (semestre ==null) ? "" : semestre;
+            
+            DAOCarrera daoCarrera = new DAOCarrera();
+            Carrera carrera = new Carrera();
+            
+            ArrayList<Carrera>listCarreras = daoCarrera.mostrar();
+            ArrayList<Grupo>listYear = daoGrupo.mostrar();
+            ArrayList<Grupo>listSemestre = daoGrupo.mostrar();
+
+            ArrayList<Grupo>lista = daoGrupo.mostrar(claveCarrera, year, semestre);
+            
+            
+            String  usuario = (String) request.getSession().getAttribute("usuario");
+            if(usuario==null)
+            response.sendRedirect("SIndex");
+        %>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -47,9 +71,45 @@
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
+          <div class="row mb-5">
+              <form  action="SGrupoo" method="POST">
+                  <select id="cmbCarreras" name="cmbCarreras">
+                     <option disabled selected  value="">Elige una Carrera</option>
+                     <%
+                           for (int i=0; i<listCarreras.size(); i++){
+                               carrera = listCarreras.get(i);
+                         %>
+                         <option value="<%=carrera.getClavecarrera()%>"><%=carrera.getClavecarrera()%>-<%=carrera.getCarrera()%></option>
+                     <%}%>
+                  </select>
+                 
+                  <select id="cmbYear" name="cmbYear">
+                     <option disabled selected  value="">Elige el Año</option>
+                     <%
+                           for (int i=0; i<listYear.size(); i++){
+                               grupo = listYear.get(i);
+                         %>
+                         <option value="<%=grupo.getYear()%>"><%=grupo.getYear()%></option>
+                     <%}%>
+                  </select>
+                 
+                 <select id="cmbSemestre" name="cmbSemestre">
+                     <option disabled selected  value="">Elige el Semestre</option>
+                     <%
+                           for (int i=0; i<listSemestre.size(); i++){
+                               grupo= listSemestre.get(i);
+                         %>
+                         <option value="<%=grupo.getSemestre()%>"><%=grupo.getSemestre()%></option>
+                     <%}%>
+                  </select>
+                    
+                 <input type="text" id="tfClaveCarrera" name="tfClaveCarrera" hidden="">
+                     <input type="text" id="tfYear" name="tfYear" hidden="">
+                     <input type="text" id="tfSemestre" name="tfSemestre" hidden="">
+                    <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
+               </form> 
+          </div>
         <div class="row mb-5">
-          
-            
            <form id="frmGrupos" action="SGrupoo" method="POST">
           <a href="#" onclick="procesar('nuevo','')"><button class="btn btn-primary">Nuevo</button></a>
         <div>
@@ -68,14 +128,10 @@
         </thead>
         <tbody>
              <% 
-                    DAOGrupo daoGrupo = new DAOGrupo();
-                    ArrayList<Grupo> lista = daoGrupo.mostrar();
                     
                    for (int i=0; i<lista.size(); i++) 
                    {
-                     Grupo grupo = new Grupo();
                      grupo = lista.get(i);
-                   
                     %>
             <tr>
                 <td class="text-center"><%=grupo.getClavegrupo()%></td>
@@ -148,6 +204,8 @@
 <script src="./recursos/externos/DataTables/jquery.min.js"></script>
 <script src="./recursos/externos/Bootstrap5/bootstrap.bundle.js"></script>
 <script src="./recursos/externos/DataTables/datatables.min.js"></script>
+<script src="./recursos/internos/js/grupos.js"></script>
+
 </body>
 </html>
 
@@ -158,6 +216,23 @@
                 "searching": true,
                  "order": true,
                  "info": false,
+                   columnDefs: [
+            {
+                target: 1,
+                visible: false,
+               
+            },
+            {
+                target: 3,
+                visible: false,
+            },
+            
+            {
+                target: 5,
+                visible: false,
+            }
+            
+        ],
 
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"

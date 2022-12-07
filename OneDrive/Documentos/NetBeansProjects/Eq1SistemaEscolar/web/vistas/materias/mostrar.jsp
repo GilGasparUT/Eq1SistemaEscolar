@@ -1,13 +1,37 @@
 
+<%@page import="beans.Grupo"%>
+<%@page import="dao.DAOGrupo"%>
+<%@page import="beans.Carrera"%>
+<%@page import="dao.DAOCarrera"%>
 <%@page import="beans.Materia"%>
 <%@page import="dao.DAOMateria"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
-<%
-  String  usuario = (String) request.getSession().getAttribute("usuario");
-  if(usuario==null)
-  response.sendRedirect("SIndex");
-%>
+        <%
+            DAOMateria daoMateria = new DAOMateria();
+            Materia materia = new Materia();
+            
+            DAOCarrera daoCarrera = new DAOCarrera();
+            Carrera carrera = new Carrera();
+            
+             DAOGrupo daoGrupo = new DAOGrupo();
+            Grupo grupo = new Grupo();
+            
+           
+            String claveCarrera =(String) request.getAttribute("claveCarrera");
+            String semestre =(String) request.getAttribute("semestre");
+            claveCarrera = (claveCarrera ==null) ? "" : claveCarrera;
+            semestre = (semestre ==null) ? "" : semestre;
+            
+            ArrayList<Materia>lista = daoMateria.mostrar(claveCarrera, semestre);
+            ArrayList<Carrera>listCarreras = daoCarrera.mostrar();
+            ArrayList<Grupo>listSemestre = daoGrupo.mostrar();
+
+            
+            String  usuario = (String) request.getSession().getAttribute("usuario");
+            if(usuario==null)
+            response.sendRedirect("SIndex");
+        %>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -47,9 +71,34 @@
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
+          <div class="row mb-5">
+              <form  action="SMateria" method="POST">
+                  <select id="cmbCarreras" name="cmbCarreras">
+                     <option disabled selected selected="">Seleciona una Carrera</option>
+                         <%
+                           for (int i=0; i<listCarreras.size(); i++){
+                               carrera = listCarreras.get(i);
+                         %>
+                         <option value="<%=carrera.getClavecarrera()%>"><%=carrera.getClavecarrera()%>-<%=carrera.getCarrera()%></option>
+                     <%}%>
+                    </select>
+                  
+                  <select id="cmbSemestre" name="cmbSemestre">
+                     <option disabled selected  value="">Elige un Semestre</option>
+                      <%
+                           for (int i=0; i<listSemestre.size(); i++){
+                               grupo= listSemestre.get(i);
+                         %>
+                         <option value="<%=grupo.getSemestre()%>"><%=grupo.getSemestre()%><%=grupo.getLetra()%></option>
+                     <%}%>
+                  </select>
+                    
+                  <input type="text" id="tfClaveCarrera" name="tfClaveCarrera" hidden="">
+                     <input type="text" id="tfSemestre" name="tfSemestre" hidden="">
+                    <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
+               </form> 
+          </div>
         <div class="row mb-5">
-          
-            
            <form id="frmMaterias" action="SMateria" method="POST">
           <a href="#" onclick="procesar('nuevo','')"><button class="btn btn-primary">Nuevo</button></a>
         <div>
@@ -66,12 +115,10 @@
         </thead>
         <tbody>
              <% 
-                    DAOMateria daoMateria = new DAOMateria();
-                    ArrayList<Materia> lista = daoMateria.mostrar();
+                    
                     
                    for (int i=0; i<lista.size(); i++) 
                    {
-                     Materia materia = new Materia();
                      materia = lista.get(i);
                    
                     %>
@@ -144,6 +191,7 @@
 <script src="./recursos/externos/DataTables/jquery.min.js"></script>
 <script src="./recursos/externos/Bootstrap5/bootstrap.bundle.js"></script>
 <script src="./recursos/externos/DataTables/datatables.min.js"></script>
+<script src="./recursos/internos/js/materias.js"></script>
 </body>
 </html>
 
@@ -154,6 +202,19 @@
                 "searching": true,
                  "order": true,
                  "info": false,
+                 
+                  columnDefs: [
+            {
+                target: 2,
+                visible: false,
+               
+            },
+            {
+                target: 3,
+                visible: false,
+            },
+            
+        ],
 
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"

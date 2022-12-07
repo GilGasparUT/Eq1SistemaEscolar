@@ -30,7 +30,12 @@ private DAOAlumno daoAlumno;
         
         accion = request.getParameter("tfAccion");
         
-        if (accion != null && accion.equalsIgnoreCase("nuevo"))
+        if(request.getParameter("btnBuscar")!=null)
+        {
+            request.setAttribute("claveCarrera", request.getParameter("tfClaveCarrera"));
+        }
+        
+       else if (accion != null && accion.equalsIgnoreCase("nuevo"))
         {
             acceso = nuevo;
         }
@@ -93,13 +98,16 @@ private DAOAlumno daoAlumno;
         {
             acceso = mostrar;
         }
+        
         request.getRequestDispatcher(acceso).forward(request, response);  
 }
     
 
  @Override
+ 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
         processRequest(request, response);
     }
 
@@ -107,7 +115,9 @@ private DAOAlumno daoAlumno;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+       
+          processRequest(request, response);
     }
 
   

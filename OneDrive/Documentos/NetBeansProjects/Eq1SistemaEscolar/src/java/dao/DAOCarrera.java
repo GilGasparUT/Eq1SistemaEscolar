@@ -48,6 +48,39 @@ public class DAOCarrera
 
      return listaCarrera;
  }
+ 
+  public ArrayList mostrar(String claveCarrera)  
+ {
+     ArrayList<Carrera> listaCarrera = new ArrayList<>();
+     String sql = "SELECT * FROM carreras WHERE ClaveCarrera='"+claveCarrera+"'";
+
+     try 
+     {   
+         con = ConexionMySQL.getConnection();
+         ps=con.prepareStatement(sql);
+         rs=ps.executeQuery();
+         while(rs.next())
+     {
+         carrera=new Carrera();
+         carrera.setClavecarrera(rs.getString("ClaveCarrera"));
+         carrera.setCarrera(rs.getString("Carrera"));
+
+         listaCarrera.add(carrera);
+     }
+     rs.close();
+     ps.close();
+     con.close();
+     }
+
+    catch (SQLException ex)
+     {
+     Logger.getLogger(DAOCarrera.class.getName()).log(Level.SEVERE, null,ex);
+     }
+
+     return listaCarrera;
+ }
+ 
+ 
  public boolean agregar(Carrera carrera)
     {
         String sql = "INSERT INTO carreras VALUES('" + carrera.getClavecarrera()+"','" +

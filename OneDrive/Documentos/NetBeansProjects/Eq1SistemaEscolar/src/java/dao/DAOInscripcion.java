@@ -49,6 +49,40 @@ public class DAOInscripcion
      
      return listaInscripciones;
  }
+ 
+ public ArrayList mostrar(String matricula)  
+ {
+     ArrayList<Inscripcion> listaInscripciones = new ArrayList<>();
+    String sql = "SELECT * FROM inscripciones WHERE Matricula='"+matricula+"'";
+     
+     try 
+     {   
+         con = ConexionMySQL.getConnection();
+         ps=con.prepareStatement(sql);
+         rs=ps.executeQuery();
+         while(rs.next())
+     {
+         inscripcion=new Inscripcion();
+         inscripcion.setClaveinscripcion(rs.getString("ClaveInscripcion"));
+         inscripcion.setFechainscripcion(rs.getString("FechaInscripcion"));
+         inscripcion.setClavegrupo(rs.getString("ClaveGrupo"));
+         inscripcion.setMatricula(rs.getString("Matricula"));
+         
+         listaInscripciones.add(inscripcion);
+     }
+     rs.close();
+     ps.close();
+     con.close();
+     }
+     
+    catch (SQLException ex)
+     {
+     Logger.getLogger(DAOInscripcion.class.getName()).log(Level.SEVERE, null,ex);
+     }
+     
+     return listaInscripciones;
+ }
+ 
  public boolean agregar(Inscripcion inscripcion)
     {
         String sql = "INSERT INTO inscripciones VALUES('" + inscripcion.getClaveinscripcion()+"','" +

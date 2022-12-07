@@ -1,13 +1,27 @@
 
+<%@page import="beans.Carrera"%>
+<%@page import="dao.DAOCarrera"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.Profesor"%>
 <%@page import="dao.DAOProfesor"%>
 <!DOCTYPE html>
 <%
-  String  usuario = (String) request.getSession().getAttribute("usuario");
-  if(usuario==null)
-  response.sendRedirect("SIndex");
-%>
+            DAOProfesor daoProfesor= new DAOProfesor();
+            Profesor profesor = new Profesor();
+            DAOCarrera daoCarrera = new DAOCarrera();
+            Carrera carrera = new Carrera();
+            
+            String claveCarrera =(String) request.getAttribute("claveCarrera");
+            claveCarrera = (claveCarrera ==null) ? "" : claveCarrera;
+            
+            ArrayList<Profesor>lista = daoProfesor.mostrar(claveCarrera);
+            ArrayList<Carrera>listCarreras = daoCarrera.mostrar();
+
+        
+            String  usuario = (String) request.getSession().getAttribute("usuario");
+            if(usuario==null)
+            response.sendRedirect("SIndex");
+        %>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -48,7 +62,21 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-5">
-          
+          <form  action="SProfesor" method="POST">
+
+                  <select id="cmbCarreras" name="cmbCarreras">
+                     <option disabled selected selected="">Seleciona una Carrera</option>
+                         <%
+                           for (int i=0; i<listCarreras.size(); i++){
+                               carrera = listCarreras.get(i);
+                         %>
+                         <option value="<%=carrera.getClavecarrera()%>"><%=carrera.getClavecarrera()%>-<%=carrera.getCarrera()%></option>
+                     <%}%>
+                    </select>
+                    <input type="text" id="tfClaveCarrera" name="tfClaveCarrera" hidden="">
+                    <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
+               </form> 
+          </div>
             
            <form id="frmProfesores" action="SProfesor" method="POST">
           <a href="#" onclick="procesar('nuevo','')"><button class="btn btn-primary">Nuevo</button></a>
@@ -65,12 +93,10 @@
         </thead>
         <tbody>
              <% 
-                    DAOProfesor daoProfesor = new DAOProfesor();
-                    ArrayList<Profesor> lista = daoProfesor.mostrar();
                     
                    for (int i=0; i<lista.size(); i++) 
                    {
-                     Profesor profesor = new Profesor();
+                    
                      profesor = lista.get(i);
                    
                     %>
@@ -142,6 +168,8 @@
 <script src="./recursos/externos/DataTables/jquery.min.js"></script>
 <script src="./recursos/externos/Bootstrap5/bootstrap.bundle.js"></script>
 <script src="./recursos/externos/DataTables/datatables.min.js"></script>
+<script src="./recursos/internos/js/profesores.js"></script>
+
 </body>
 </html>
 
@@ -152,6 +180,13 @@
                 "searching": true,
                  "order": true,
                  "info": false,
+                 columnDefs: [
+            {
+                target: 2,
+                visible: false,
+               
+            },
+          ],
 
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"

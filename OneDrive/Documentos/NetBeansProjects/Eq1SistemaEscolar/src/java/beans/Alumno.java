@@ -96,7 +96,7 @@ public class Alumno
     public void setClavecarrera(String clavecarrera) {
         this.clavecarrera = clavecarrera;
     }
-
+    
     public double getProm() {
         return prom;
     }

@@ -30,6 +30,11 @@ private DAOCarrera daoCarrera;
         editar  = "vistas/carreras/editar.jsp";
 
         accion = request.getParameter("tfAccion");
+        
+        if(request.getParameter("btnBuscar")!=null)
+        {
+            request.setAttribute("claveCarrera", request.getParameter("tfClaveCarrera"));
+        }
 
         if (accion != null && accion.equalsIgnoreCase("nuevo"))
         {

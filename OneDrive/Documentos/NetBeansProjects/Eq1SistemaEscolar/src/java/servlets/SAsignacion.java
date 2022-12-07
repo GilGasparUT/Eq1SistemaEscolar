@@ -1,8 +1,7 @@
 package servlets;
 
-import beans.Alumno;
+
 import beans.Asignacion;
-import dao.DAOAlumno;
 import dao.DAOAsignacion;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -31,6 +30,11 @@ private DAOAsignacion daoAsignacion;
         editar  = "vistas/asignaciones/editar.jsp";
         
         accion = request.getParameter("tfAccion");
+        
+         if(request.getParameter("btnBuscar")!=null)
+        {
+            request.setAttribute("claveEmpleado", request.getParameter("tfClaveEmpleado"));
+        }
         
         if (accion != null && accion.equalsIgnoreCase("nuevo"))
         {

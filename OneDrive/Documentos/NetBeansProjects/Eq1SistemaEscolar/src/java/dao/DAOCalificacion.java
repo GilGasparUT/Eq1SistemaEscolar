@@ -53,6 +53,42 @@ public class DAOCalificacion
      
      return listaCalificaciones;
  }
+ 
+ public ArrayList mostrar( String claveInscripcion)  
+ {
+     ArrayList<Calificacion> listaCalificaciones = new ArrayList<>();
+String sql = "SELECT CONCAT(Nombre,' ', Apellidos) AS 'Nombre Completo', Parcial1,Parcial2,Parcial3,Extra from inscripciones ins, calificaciones cal,alumnos alum where cal.ClaveInscripcion=ins.ClaveInscripcion and ins.Matricula=alum.Matricula and  cal.ClaveInscripcion='"+claveInscripcion+"'";
+     try 
+     {   
+         con = ConexionMySQL.getConnection();
+         ps=con.prepareStatement(sql);
+         rs=ps.executeQuery();
+         while(rs.next())
+     {
+         calificacion=new Calificacion();
+         
+         calificacion.setClavecalificacion(rs.getString("ClaveCalificacion"));
+         calificacion.setP1(rs.getString("P1"));
+         calificacion.setP2(rs.getString("P2"));
+         calificacion.setP3(rs.getString("P3"));
+         calificacion.setExtra(rs.getString("Extra"));
+         calificacion.setClaveasignacion(rs.getString("ClaveAsignacion"));
+         calificacion.setClaveinscripcion(rs.getString("ClaveInscripcion"));
+         
+         listaCalificaciones.add(calificacion);
+     }
+     rs.close();
+     ps.close();
+     con.close();
+     }
+     
+    catch (SQLException ex)
+     {
+     Logger.getLogger(DAOCalificacion.class.getName()).log(Level.SEVERE, null,ex);
+     }
+     
+     return listaCalificaciones;
+ }
  public boolean agregar(Calificacion calificacion)
     {
         String sql = "INSERT INTO calificaciones VALUES('" + calificacion.getClavecalificacion()+"','" +
@@ -83,7 +119,7 @@ public class DAOCalificacion
  
  public Calificacion buscar(String clavecalificacion)
  {
-    String sql = "SELECT * FROM calificaciones WHERE ClaveCalificacion='"+clavecalificacion+"'";
+            String sql = "SELECT * FROM calificaciones WHERE ClaveCalificacion='"+clavecalificacion+"'";
         try 
         {
             con=ConexionMySQL.getConnection();

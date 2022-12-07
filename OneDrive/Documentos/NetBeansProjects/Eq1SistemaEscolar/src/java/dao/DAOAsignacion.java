@@ -48,6 +48,40 @@ public class DAOAsignacion
      
      return listaAsignaciones;
  }
+ 
+ public ArrayList mostrar(String claveEmpleado)  
+ {
+     ArrayList<Asignacion> listaAsignaciones = new ArrayList<>();
+    String sql = "SELECT * FROM asignaciones WHERE ClaveEmpleado='"+claveEmpleado+"'";
+      
+//String sql = "SELECT Nombre,Materia, ClaveGrupo,ClaveAsignacion  FROM profesores, grupos, materias, asignaciones  WHERE profesores.ClaveEmpleado= asignaciones.'"+claveEmpleado+"' AND asignaciones.ClaveGrupo=grupos.ClaveGrupo AND  asignaciones.ClaveGrupo = grupos.ClaveGrupo ";
+     
+     try 
+     {   
+         con = ConexionMySQL.getConnection();
+         ps=con.prepareStatement(sql);
+         rs=ps.executeQuery();
+         while(rs.next())
+     {
+         asignacion=new Asignacion();
+         asignacion.setClaveasignacion(rs.getString("ClaveAsignacion"));
+         asignacion.setClaveempleado(rs.getString("ClaveEmpleado"));
+         asignacion.setClavemat(rs.getString("ClaveMat"));
+         asignacion.setClavegrupo(rs.getString("ClaveGrupo"));
+         listaAsignaciones.add(asignacion);
+     }
+     rs.close();
+     ps.close();
+     con.close();
+     }
+     
+    catch (SQLException ex)
+     {
+     Logger.getLogger(DAOAsignacion.class.getName()).log(Level.SEVERE, null,ex);
+     }
+     
+     return listaAsignaciones;
+ }
  public boolean agregar(Asignacion asignacion)
     {
         String sql = "INSERT INTO asignaciones VALUES('" + asignacion.getClaveasignacion()+"','" +

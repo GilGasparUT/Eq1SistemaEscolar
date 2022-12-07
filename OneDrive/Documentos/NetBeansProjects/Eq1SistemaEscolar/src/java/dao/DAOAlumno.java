@@ -53,6 +53,45 @@ public class DAOAlumno
      
      return listaAlumnos;
  }
+
+ public ArrayList mostrar(String claveCarrera)  
+ {
+     ArrayList<Alumno> listaAlumnos = new ArrayList<>();
+    String sql = "SELECT * FROM alumnos WHERE ClaveCarrera='"+claveCarrera+"'";
+    //String sql = "SELECT DISTINCT alumnos.ClaveCarrera, carreras.Carrera FROM alumnos, carreras  WHERE alumnos.ClaveCarrera='"+claveCarrera+"'";
+        try 
+        {
+            con=ConexionMySQL.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                alumno = new Alumno();
+                alumno.setMatricula(rs.getString("Matricula"));
+                alumno.setYear(rs.getString("Year"));
+                alumno.setCurp(rs.getString("CURP"));
+                alumno.setNombre(rs.getString("Nombre"));
+                alumno.setApellidos(rs.getString("Apellidos"));
+                alumno.setFechanac(rs.getString("FechaNac"));
+                alumno.setSexo(rs.getString("Sexo"));
+                alumno.setClavecarrera(rs.getString("ClaveCarrera"));
+                
+                
+                listaAlumnos.add(alumno);
+
+            }
+            rs.close();
+            ps.close();
+            con.close();   
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(DAOAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ return listaAlumnos;
+ }
+ 
+ 
  public boolean agregar(Alumno alumno)
     {
         String sql = "INSERT INTO alumnos VALUES('" + alumno.getMatricula()+"','" +
@@ -166,4 +205,5 @@ public class DAOAlumno
      return true;
  }
  
+
 }

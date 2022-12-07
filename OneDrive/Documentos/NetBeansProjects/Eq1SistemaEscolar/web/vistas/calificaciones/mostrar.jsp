@@ -1,13 +1,25 @@
 
+<%@page import="beans.Alumno"%>
+<%@page import="dao.DAOAlumno"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.Calificacion"%>
 <%@page import="dao.DAOCalificacion"%>
 <!DOCTYPE html>
-<%
-  String  usuario = (String) request.getSession().getAttribute("usuario");
-  if(usuario==null)
-  response.sendRedirect("SIndex");
-%>
+      <%
+            DAOCalificacion daoCalificacion = new DAOCalificacion();
+            Calificacion calificacion = new Calificacion();
+            
+            DAOAlumno daoAlumno = new DAOAlumno();
+            Alumno alumno = new Alumno();
+            
+            String claveInscripcion =(String) request.getAttribute("claveInscripcion");
+            claveInscripcion = (claveInscripcion ==null) ? "" : claveInscripcion;
+            ArrayList<Calificacion>lista = daoCalificacion.mostrar(claveInscripcion);
+           
+            String  usuario = (String) request.getSession().getAttribute("usuario");
+            if(usuario==null)
+            response.sendRedirect("SIndex");
+        %>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -48,8 +60,18 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-5">
-          
-            
+              <form  action="SCalificacion" method="POST">
+                  
+                  <select id="cmbCalificacion" name="cmbCalificacion">
+                  <option value="">Elige una Opcion</option>
+                     <option value="2">Rogelio Pascualeño Chepillo<%=alumno.getNombre()%></option>
+                     <option value="4">Adrian Gil Gaspar</option>
+                    </select>
+                     <input type="text" id="tfClaveInscripcion" name="tfClaveInscripcion">
+                    <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
+               </form> 
+          </div>
+        <div class="row mb-5">
            <form id="frmCalificaciones" action="SCalificacion" method="POST">
           <a href="#" onclick="procesar('nuevo','')"><button class="btn btn-primary">Nuevo</button></a>
         <div>
@@ -69,12 +91,10 @@
         </thead>
         <tbody>
              <% 
-                    DAOCalificacion daoCalificacion = new DAOCalificacion();
-                    ArrayList<Calificacion> lista = daoCalificacion.mostrar();
+                    
                     
                    for (int i=0; i<lista.size(); i++) 
                    {
-                     Calificacion calificacion = new Calificacion();
                      calificacion = lista.get(i);
                    
                     %>
@@ -150,6 +170,8 @@
 <script src="./recursos/externos/DataTables/jquery.min.js"></script>
 <script src="./recursos/externos/Bootstrap5/bootstrap.bundle.js"></script>
 <script src="./recursos/externos/DataTables/datatables.min.js"></script>
+<script src="./recursos/internos/js/calificaciones.js"></script>
+
 </body>
 </html>
 

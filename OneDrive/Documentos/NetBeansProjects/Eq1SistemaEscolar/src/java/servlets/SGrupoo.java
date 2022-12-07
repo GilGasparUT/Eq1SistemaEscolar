@@ -32,7 +32,15 @@ public class SGrupoo extends HttpServlet
         
         accion = request.getParameter("tfAccion");
         
-        if(accion != null && accion.equalsIgnoreCase("nuevo"))
+        if(request.getParameter("btnBuscar")!=null)
+        {
+            request.setAttribute("semestre", request.getParameter("tfSemestre"));
+            request.setAttribute("year", request.getParameter("tfYear"));
+            request.setAttribute("claveCarrera", request.getParameter("tfClaveCarrera"));
+
+        }
+        
+        else if(accion != null && accion.equalsIgnoreCase("nuevo"))
         {
             acceso = nuevo;
         }

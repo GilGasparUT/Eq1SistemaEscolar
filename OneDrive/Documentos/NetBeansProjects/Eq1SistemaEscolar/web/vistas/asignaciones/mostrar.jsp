@@ -1,13 +1,35 @@
 
+<%@page import="beans.Materia"%>
+<%@page import="dao.DAOMateria"%>
+<%@page import="beans.Profesor"%>
+<%@page import="dao.DAOProfesor"%>
 <%@page import="beans.Asignacion"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.DAOAsignacion"%>
 <!DOCTYPE html>
-<%
-  String  usuario = (String) request.getSession().getAttribute("usuario");
-  if(usuario==null)
-  response.sendRedirect("SIndex");
-%>
+ <%
+            DAOAsignacion daoAsignacion = new DAOAsignacion();
+            Asignacion asignacion = new Asignacion();
+            
+            DAOProfesor daoProfesor= new DAOProfesor();
+            Profesor profesor = new Profesor();
+            
+            DAOMateria daoMateria = new DAOMateria();
+            Materia materia = new Materia();
+            
+            String claveEmpleado =(String) request.getAttribute("claveEmpleado");
+            claveEmpleado = (claveEmpleado ==null) ? "" : claveEmpleado;
+            ArrayList<Asignacion>lista = daoAsignacion.mostrar(claveEmpleado);
+            ArrayList<Asignacion>listClaveEmpleado = daoAsignacion.mostrar();
+            ArrayList<Profesor>listNombrePro = daoProfesor.mostrar();
+            ArrayList<Materia>listMateria = daoMateria.mostrar();
+
+
+        
+            String  usuario = (String) request.getSession().getAttribute("usuario");
+            if(usuario==null)
+            response.sendRedirect("SIndex");
+        %>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -47,9 +69,22 @@
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
+          <div class="row mb-5">
+               <form  action="SAsignacion" method="POST">
+                  <select id="cmbAsignacion" name="cmbAsignacion">
+                    <option value="select">Elige la Clave del Profesor</option>
+                    <%
+                           for (int i=0; i<listClaveEmpleado.size(); i++){
+                               asignacion = listClaveEmpleado.get(i);
+                         %>
+                         <option value="<%=asignacion.getClaveempleado()%>"><%=asignacion.getClaveempleado()%></option>
+                     <%}%>
+                  </select>
+                  <input type="text" id="tfClaveEmpleado" name="tfClaveEmpleado" hidden="">
+                    <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
+                    </form> 
+          </div>
         <div class="row mb-5">
-          
-            
            <form id="frmAsignaciones" action="SAsignacion" method="POST">
           <a href="#" onclick="procesar('nuevo','')"><button class="btn btn-primary">Nuevo</button></a>
         <div>
@@ -57,28 +92,27 @@
         <thead style="color:white;">
             <tr  style="background-color:grey;">
                
-                <th class="text-center">Clave_Asignacion</th>
-                <th class="text-center">Clave_Empleado</th>
-                <th class="text-center">Clave_Materia</th>
-                <th class="text-center">Clave_Grupo</th>
+                <th class="text-center">No. deAsignacion</th>
+                <th class="text-center">Profesor</th>
+                <th class="text-center">Materia</th>
+                <th class="text-center">Grupo</th>
                 <th class="text-center">opciones</th>
             </tr>
         </thead>
         <tbody>
              <% 
-                    DAOAsignacion daoAsignacion = new DAOAsignacion();
-                    ArrayList<Asignacion> lista = daoAsignacion.mostrar();
                     
                    for (int i=0; i<lista.size(); i++) 
                    {
-                     Asignacion asignacion = new Asignacion();
                      asignacion = lista.get(i);
+                     profesor = listNombrePro.get(i);
+                     materia = listMateria.get(i);
                    
                     %>
             <tr>
                 <td class="text-center"><%=asignacion.getClaveasignacion()%></td>
-                <td class="text-center"><%=asignacion.getClaveempleado()%></td>
-                <td class="text-center"><%=asignacion.getClavemat()%></td>
+                <td class="text-center"><%=profesor.getNombre()%>&nbsp<%=profesor.getApellidos()%></td>
+                <td class="text-center"><%=materia.getMateria()%></td>
                 <td class="text-center"><%=asignacion.getClavegrupo()%></td>
                 <td class="text-center">
                     <a class="btn btn-light" style="text-decoration: none;" href="#" onclick="procesar('editar','<%=asignacion.getClaveasignacion()%>')">
@@ -144,6 +178,8 @@
 <script src="./recursos/externos/DataTables/jquery.min.js"></script>
 <script src="./recursos/externos/Bootstrap5/bootstrap.bundle.js"></script>
 <script src="./recursos/externos/DataTables/datatables.min.js"></script>
+<script src="./recursos/internos/js/asignaciones.js"></script>
+
 </body>
 </html>
 
@@ -154,6 +190,7 @@
                 "searching": true,
                  "order": true,
                  "info": false,
+                 
 
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"

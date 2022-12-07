@@ -53,6 +53,44 @@ public ArrayList mostrar()
         
         return listaGrupos;
     }
+
+public ArrayList mostrar(String claveCarrera , String year, String semestre)
+    {
+        ArrayList<Grupo> listaGrupos = new ArrayList<>();
+        String sql = "SELECT * FROM grupos WHERE ClaveCarrera ='"+claveCarrera+"' AND Year='"+year+"' AND Semestre='"+semestre+"'";
+            
+        try 
+        {
+         
+         
+            con = ConexionMySQL.getConnection(); 
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery(); 
+            while(rs.next())
+            {
+                grupo=new Grupo();
+                grupo.setClavegrupo(rs.getString("ClaveGrupo"));
+                grupo.setSemestre(rs.getString("Semestre"));
+                grupo.setLetra(rs.getString("Letra"));
+                grupo.setYear(rs.getString("Year"));
+                grupo.setTurno(rs.getString("Turno"));
+                grupo.setClavecarrera(rs.getString("ClaveCarrera"));
+
+                
+                listaGrupos.add(grupo);
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(DAOGrupo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listaGrupos;
+    }
+    
     
     public boolean agregar(Grupo grupo)
     {

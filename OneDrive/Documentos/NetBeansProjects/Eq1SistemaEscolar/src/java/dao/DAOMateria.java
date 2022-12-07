@@ -17,10 +17,43 @@ public class DAOMateria
     private ResultSet rs;
     private Materia materia;
     
-    public ArrayList mostrar()  
+public ArrayList mostrar()  
  {
      ArrayList<Materia> listaMaterias = new ArrayList<>();
      String sql = "SELECT * FROM materias";
+     
+     try 
+     {   
+         con = ConexionMySQL.getConnection();
+         ps=con.prepareStatement(sql);
+         rs=ps.executeQuery();
+         while(rs.next())
+     {
+         materia=new Materia();
+         materia.setClavemat(rs.getString("ClaveMat"));
+         materia.setMateria(rs.getString("Materia"));
+         materia.setSemestre(rs.getString("Semestre"));
+         materia.setClavecarrera(rs.getString("ClaveCarrera"));
+       
+         listaMaterias.add(materia);
+     }
+     rs.close();
+     ps.close();
+     con.close();
+     }
+     
+    catch (SQLException ex)
+     {
+     Logger.getLogger(DAOMateria.class.getName()).log(Level.SEVERE, null,ex);
+     }
+     
+     return listaMaterias;
+ }
+public ArrayList mostrar(String claveCarrera , String semestre)  
+ {
+     ArrayList<Materia> listaMaterias = new ArrayList<>();
+    String sql = "SELECT * FROM materias WHERE ClaveCarrera ='"+claveCarrera+"' AND Semestre='"+semestre+"'";
+    
      
      try 
      {   

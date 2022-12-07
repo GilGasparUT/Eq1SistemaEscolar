@@ -31,6 +31,11 @@ private DAOCalificacion daoCalificacion;
         
         accion = request.getParameter("tfAccion");
         
+        if(request.getParameter("btnBuscar")!=null)
+        {
+            request.setAttribute("claveInscripcion", request.getParameter("tfClaveInscripcion"));
+        }
+        
         if (accion != null && accion.equalsIgnoreCase("nuevo"))
         {
             acceso = nuevo;

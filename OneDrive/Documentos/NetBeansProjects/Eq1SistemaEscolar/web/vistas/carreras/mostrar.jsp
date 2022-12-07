@@ -4,10 +4,21 @@
 <%@page import="dao.DAOCarrera"%>
 <!DOCTYPE html>
 <%
-  String  usuario = (String) request.getSession().getAttribute("usuario");
-  if(usuario==null)
-  response.sendRedirect("SIndex");
-%>
+            DAOCarrera daoCarrera = new DAOCarrera();
+            Carrera carrera = new Carrera();
+            
+            String claveCarrera =(String) request.getAttribute("claveCarrera");
+            claveCarrera = (claveCarrera ==null) ? "" : claveCarrera;
+            
+            ArrayList<Carrera>lista = daoCarrera.mostrar(claveCarrera);
+            
+            ArrayList<Carrera>listCarreras = daoCarrera.mostrar();
+
+        
+            String  usuario = (String) request.getSession().getAttribute("usuario");
+            if(usuario==null)
+            response.sendRedirect("SIndex");
+        %>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -47,9 +58,22 @@
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
+          <div class="row mb-5">
+              <form  action="SCarrera" method="POST">
+                  <select id="cmbCarreras" name="cmbCarreras">
+                     <option disabled selected>Seleciona una Carrera</option>
+                         <%
+                           for (int i=0; i<listCarreras.size(); i++){
+                               carrera = listCarreras.get(i);
+                         %>
+                         <option value="<%=carrera.getClavecarrera()%>"><%=carrera.getClavecarrera()%>-<%=carrera.getCarrera()%></option>
+                     <%}%>
+                    </select>
+                    <input type="text" id="tfClaveCarrera" name="tfClaveCarrera" hidden="">
+                    <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
+               </form> 
+          </div>
         <div class="row mb-5">
-          
-            
            <form id="frmCarreras" action="SCarrera" method="POST">
           <a href="#" onclick="procesar('nuevo','')"><button class="btn btn-primary">Nuevo</button></a>
         <div>
@@ -64,12 +88,10 @@
         </thead>
         <tbody>
              <% 
-                    DAOCarrera daoCarrera = new DAOCarrera();
-                    ArrayList<Carrera> lista = daoCarrera.mostrar();
+                    
                     
                    for (int i=0; i<lista.size(); i++) 
                    {
-                     Carrera carrera = new Carrera();
                      carrera = lista.get(i);
                    
                     %>
@@ -140,6 +162,8 @@
 <script src="./recursos/externos/DataTables/jquery.min.js"></script>
 <script src="./recursos/externos/Bootstrap5/bootstrap.bundle.js"></script>
 <script src="./recursos/externos/DataTables/datatables.min.js"></script>
+<script src="./recursos/internos/js/carreras.js"></script>
+
 </body>
 </html>
 
@@ -150,6 +174,13 @@
                 "searching": true,
                  "order": true,
                  "info": false,
+                 columnDefs: [
+            {
+                target: 0,
+                visible: false,
+               
+            },
+          ],
 
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
