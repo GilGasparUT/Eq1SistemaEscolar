@@ -37,6 +37,9 @@ public class SGrupoo extends HttpServlet
             request.setAttribute("semestre", request.getParameter("tfSemestre"));
             request.setAttribute("year", request.getParameter("tfYear"));
             request.setAttribute("claveCarrera", request.getParameter("tfClaveCarrera"));
+            request.setAttribute("atrCarrera", request.getParameter("tfClaveCarrera"));
+            request.setAttribute("atrYear", request.getParameter("tfYear"));
+            request.setAttribute("atrSemestre", request.getParameter("tfSemestre"));
 
         }
         

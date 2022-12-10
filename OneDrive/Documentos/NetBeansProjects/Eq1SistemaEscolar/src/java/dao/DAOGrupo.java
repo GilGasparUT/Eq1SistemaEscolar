@@ -90,7 +90,36 @@ public ArrayList mostrar(String claveCarrera , String year, String semestre)
         
         return listaGrupos;
     }
-    
+    public ArrayList listSemestre()
+    {
+        ArrayList<Grupo> listaGrupos = new ArrayList<>();
+        String sql = "SELECT DISTINCT Semestre FROM grupos";
+            
+        try 
+        {
+         
+         
+            con = ConexionMySQL.getConnection(); 
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery(); 
+            while(rs.next())
+            {
+                grupo=new Grupo();
+                grupo.setSemestre(rs.getString("Semestre"));
+                
+                listaGrupos.add(grupo);
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(DAOGrupo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listaGrupos;
+    }
     
     public boolean agregar(Grupo grupo)
     {

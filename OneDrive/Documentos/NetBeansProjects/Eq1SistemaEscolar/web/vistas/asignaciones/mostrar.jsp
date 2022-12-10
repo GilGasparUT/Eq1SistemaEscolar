@@ -7,22 +7,21 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.DAOAsignacion"%>
 <!DOCTYPE html>
- <%
+         <%
             DAOAsignacion daoAsignacion = new DAOAsignacion();
             Asignacion asignacion = new Asignacion();
             
             DAOProfesor daoProfesor= new DAOProfesor();
             Profesor profesor = new Profesor();
             
-            DAOMateria daoMateria = new DAOMateria();
-            Materia materia = new Materia();
-            
             String claveEmpleado =(String) request.getAttribute("claveEmpleado");
+            String atrClaveEmpleado =(String) request.getAttribute("atrClaveEmpleado");
             claveEmpleado = (claveEmpleado ==null) ? "" : claveEmpleado;
+            
             ArrayList<Asignacion>lista = daoAsignacion.mostrar(claveEmpleado);
+
             ArrayList<Asignacion>listClaveEmpleado = daoAsignacion.mostrar();
             ArrayList<Profesor>listNombrePro = daoProfesor.mostrar();
-            ArrayList<Materia>listMateria = daoMateria.mostrar();
 
 
         
@@ -72,13 +71,23 @@
           <div class="row mb-5">
                <form  action="SAsignacion" method="POST">
                   <select id="cmbAsignacion" name="cmbAsignacion">
-                    <option value="select">Elige la Clave del Profesor</option>
+                    <option hidden>Elige la Clave del Profesor</option>
                     <%
-                           for (int i=0; i<listClaveEmpleado.size(); i++){
+                           for (int i=0; i<listClaveEmpleado.size(); i++)
+                           {
                                asignacion = listClaveEmpleado.get(i);
+                               profesor = listNombrePro.get(i);
+                        if(atrClaveEmpleado!=null && claveEmpleado.equals(listClaveEmpleado.get(i).getClaveempleado()))
+                             {
+                             %>
+                             <option value="<%=atrClaveEmpleado%>"selected><%=listClaveEmpleado.get(i).getClaveempleado()%>-<%=profesor.getNombre()%>&nbsp<%=profesor.getApellidos()%></option>
+                             <%}
+                             else
+                             {  
+                                                
                          %>
-                         <option value="<%=asignacion.getClaveempleado()%>"><%=asignacion.getClaveempleado()%></option>
-                     <%}%>
+                         <option value="<%=asignacion.getClaveempleado()%>"><%=asignacion.getClaveempleado()%>-<%=profesor.getNombre()%>&nbsp<%=profesor.getApellidos()%></option>
+                     <%}}%>
                   </select>
                   <input type="text" id="tfClaveEmpleado" name="tfClaveEmpleado" hidden="">
                     <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
@@ -93,7 +102,7 @@
             <tr  style="background-color:grey;">
                
                 <th class="text-center">No. deAsignacion</th>
-                <th class="text-center">Profesor</th>
+                <th class="text-center">ClaveProfesor</th>
                 <th class="text-center">Materia</th>
                 <th class="text-center">Grupo</th>
                 <th class="text-center">opciones</th>
@@ -105,14 +114,12 @@
                    for (int i=0; i<lista.size(); i++) 
                    {
                      asignacion = lista.get(i);
-                     profesor = listNombrePro.get(i);
-                     materia = listMateria.get(i);
-                   
+                    
                     %>
             <tr>
                 <td class="text-center"><%=asignacion.getClaveasignacion()%></td>
-                <td class="text-center"><%=profesor.getNombre()%>&nbsp<%=profesor.getApellidos()%></td>
-                <td class="text-center"><%=materia.getMateria()%></td>
+                <td class="text-center"><%=asignacion.getClaveempleado()%></td>
+                <td class="text-center"><%=asignacion.getClavemat()%></td>
                 <td class="text-center"><%=asignacion.getClavegrupo()%></td>
                 <td class="text-center">
                     <a class="btn btn-light" style="text-decoration: none;" href="#" onclick="procesar('editar','<%=asignacion.getClaveasignacion()%>')">
@@ -190,6 +197,14 @@
                 "searching": true,
                  "order": true,
                  "info": false,
+                 columnDefs: [
+            {
+                target:0,
+                visible: false,
+               
+            }
+                 
+   ],   
                  
 
                 "language": {

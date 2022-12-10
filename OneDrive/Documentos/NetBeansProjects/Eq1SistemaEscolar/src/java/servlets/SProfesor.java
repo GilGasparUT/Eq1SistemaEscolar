@@ -34,6 +34,8 @@ private DAOProfesor daoProfesor;
         if(request.getParameter("btnBuscar")!=null)
         {
             request.setAttribute("claveCarrera", request.getParameter("tfClaveCarrera"));
+            request.setAttribute("atrCarrera", request.getParameter("tfClaveCarrera"));
+
         }
 
         if (accion != null && accion.equalsIgnoreCase("nuevo"))

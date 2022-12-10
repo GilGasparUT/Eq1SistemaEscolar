@@ -57,7 +57,7 @@ public class DAOCalificacion
  public ArrayList mostrar( String claveInscripcion)  
  {
      ArrayList<Calificacion> listaCalificaciones = new ArrayList<>();
-String sql = "SELECT CONCAT(Nombre,' ', Apellidos) AS 'Nombre Completo', Parcial1,Parcial2,Parcial3,Extra from inscripciones ins, calificaciones cal,alumnos alum where cal.ClaveInscripcion=ins.ClaveInscripcion and ins.Matricula=alum.Matricula and  cal.ClaveInscripcion='"+claveInscripcion+"'";
+            String sql = "SELECT * FROM calificaciones WHERE ClaveInscripcion='"+claveInscripcion+"'";
      try 
      {   
          con = ConexionMySQL.getConnection();

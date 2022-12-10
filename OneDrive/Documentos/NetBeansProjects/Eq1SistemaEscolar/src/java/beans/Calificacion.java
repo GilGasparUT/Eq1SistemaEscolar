@@ -2,6 +2,7 @@
 package beans;
 
 
+
 public class Calificacion
 {
     private String clavecalificacion;
@@ -84,6 +85,6 @@ public class Calificacion
     public void setClaveinscripcion(String claveinscripcion) {
         this.claveinscripcion = claveinscripcion;
     }
-
+    
     
  }

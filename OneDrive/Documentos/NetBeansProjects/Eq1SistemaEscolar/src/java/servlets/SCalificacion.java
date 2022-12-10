@@ -34,6 +34,8 @@ private DAOCalificacion daoCalificacion;
         if(request.getParameter("btnBuscar")!=null)
         {
             request.setAttribute("claveInscripcion", request.getParameter("tfClaveInscripcion"));
+            request.setAttribute("atrClaveInscripcion", request.getParameter("tfClaveInscripcion"));
+
         }
         
         if (accion != null && accion.equalsIgnoreCase("nuevo"))

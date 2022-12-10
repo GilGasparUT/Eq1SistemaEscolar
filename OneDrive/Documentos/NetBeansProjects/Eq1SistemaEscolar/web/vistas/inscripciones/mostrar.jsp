@@ -9,15 +9,17 @@
             DAOInscripcion daoInscripcion = new DAOInscripcion();
             Inscripcion inscripcion= new Inscripcion();
             
-             DAOAlumno daoAlumno = new DAOAlumno();
+            DAOAlumno daoAlumno = new DAOAlumno();
             Alumno alumno = new Alumno();
             
             String matricula =(String) request.getAttribute("matricula");
+            String atrMatricula =(String) request.getAttribute("atrMatricula");
+
             matricula = (matricula ==null) ? "" : matricula;
             
             ArrayList<Inscripcion>lista = daoInscripcion.mostrar(matricula);
             ArrayList<Alumno>listMatricula = daoAlumno.mostrar();
-             ArrayList<Alumno>listAlumno = daoAlumno.mostrar();
+            ArrayList<Alumno>listAlumno = daoAlumno.mostrar();
 
 
             
@@ -68,13 +70,21 @@
             <div class="row mb-5">
               <form  action="SInscripcion" method="POST">
                   <select id="cmbInscripcion" name="cmbInscripcion">
-                  <option disabled selected  value="">Elige un Alumno</option>
+                  <option hidden>Elige un Alumno</option>
                      <%
-                           for (int i=0; i<listMatricula.size(); i++){
+                           for (int i=0; i<listMatricula.size(); i++)
+                           {
                                alumno = listMatricula.get(i);
-                         %>
-                         <option value="<%=alumno.getMatricula()%>"><%=alumno.getMatricula()%>-<%=alumno.getNombre()%></option>
-                     <%}%>
+                               
+                              if(atrMatricula!=null && matricula.equals(listMatricula.get(i).getMatricula()))                                   
+                           {
+                          %>
+                          <option value="<%=atrMatricula%>"selected><%=listMatricula.get(i).getMatricula()%>-<%=alumno.getNombre()%>&nbsp<%=alumno.getApellidos()%></option>
+                          <%
+                          }else{
+                          %>
+                         <option value="<%=alumno.getMatricula()%>"><%=alumno.getMatricula()%>-<%=alumno.getNombre()%>&nbsp<%=alumno.getApellidos()%></option>
+                     <%}}%>
                     </select>
                     <input type="text" id="tfMatricula" name="tfMatricula" hidden="">
                     <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
@@ -90,8 +100,8 @@
                
                 <th class="text-center">Clave_Inscripcion</th>
                 <th class="text-center">Fecha_Inscripcion</th>
-                <th class="text-center">Clave_Grupo</th>
-                <th class="text-center">NombreAlumno</th>
+                <th class="text-center">Grupo</th>
+                <th class="text-center">Matricula del Alumno</th>
                 <th class="text-center">opciones</th>
             </tr>
         </thead>
@@ -109,7 +119,7 @@
                 <td class="text-center"><%=inscripcion.getClaveinscripcion()%></td>
                 <td class="text-center"><%=inscripcion.getFechainscripcion()%></td>
                 <td class="text-center"><%=inscripcion.getClavegrupo()%></td>
-                <td class="text-center"><%=alumno.getNombre()%>&nbsp<%=alumno.getApellidos()%></td>
+                <td class="text-center"><%=inscripcion.getMatricula()%></td>
                 <td class="text-center">
                     <a class="btn btn-light" style="text-decoration: none;" href="#" onclick="procesar('editar','<%=inscripcion.getClaveinscripcion()%>')">
                     <img src="./recursos/internos/img/icon/editar.png"  alt="" width="30" height="30"></a>
@@ -186,7 +196,14 @@
                 "searching": true,
                  "order": true,
                  "info": false,
+                 columnDefs: [
+            {
+                target:0,
+                visible: false,
+               
+            }
                  
+   ],   
 
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"

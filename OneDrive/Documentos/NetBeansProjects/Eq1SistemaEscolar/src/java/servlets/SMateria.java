@@ -28,11 +28,14 @@ private DAOMateria daoMateria;
         editar  = "vistas/materias/editar.jsp";
         
         accion = request.getParameter("tfAccion");
-        //Modificacion
+       
         if(request.getParameter("btnBuscar")!=null)
         {
             request.setAttribute("claveCarrera", request.getParameter("tfClaveCarrera"));
             request.setAttribute("semestre", request.getParameter("tfSemestre"));
+            request.setAttribute("atrCarrera", request.getParameter("tfClaveCarrera"));
+            request.setAttribute("atrSemestre", request.getParameter("tfSemestre"));
+
         }
         
         if (accion != null && accion.equalsIgnoreCase("nuevo"))

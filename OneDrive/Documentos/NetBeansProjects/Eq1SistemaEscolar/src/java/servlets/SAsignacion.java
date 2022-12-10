@@ -34,6 +34,8 @@ private DAOAsignacion daoAsignacion;
          if(request.getParameter("btnBuscar")!=null)
         {
             request.setAttribute("claveEmpleado", request.getParameter("tfClaveEmpleado"));
+            request.setAttribute("atrClaveEmpleado", request.getParameter("tfClaveEmpleado"));
+
         }
         
         if (accion != null && accion.equalsIgnoreCase("nuevo"))

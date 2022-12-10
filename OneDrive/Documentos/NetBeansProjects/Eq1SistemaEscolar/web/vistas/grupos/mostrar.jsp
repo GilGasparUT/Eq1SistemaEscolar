@@ -13,6 +13,11 @@
             String claveCarrera =(String) request.getAttribute("claveCarrera");
             String year =(String) request.getAttribute("year");
             String semestre =(String) request.getAttribute("semestre");
+            String atrCarrera =(String) request.getAttribute("atrCarrera");
+            String atrYear =(String) request.getAttribute("atrYear");
+            String atrSemestre =(String) request.getAttribute("atrSemestre");
+
+
             
             claveCarrera = (claveCarrera ==null) ? "" : claveCarrera;
             year = (year ==null) ? "" : year;
@@ -23,9 +28,11 @@
             
             ArrayList<Carrera>listCarreras = daoCarrera.mostrar();
             ArrayList<Grupo>listYear = daoGrupo.mostrar();
-            ArrayList<Grupo>listSemestre = daoGrupo.mostrar();
+            ArrayList<Grupo>listSemestre = daoGrupo.listSemestre();
 
             ArrayList<Grupo>lista = daoGrupo.mostrar(claveCarrera, year, semestre);
+         
+
             
             
             String  usuario = (String) request.getSession().getAttribute("usuario");
@@ -74,36 +81,63 @@
           <div class="row mb-5">
               <form  action="SGrupoo" method="POST">
                   <select id="cmbCarreras" name="cmbCarreras">
-                     <option disabled selected  value="">Elige una Carrera</option>
-                     <%
-                           for (int i=0; i<listCarreras.size(); i++){
+                     <option hidden>Seleciona una Carrera</option>
+                         <%
+                           for (int i=0; i<listCarreras.size(); i++)
+                           {
                                carrera = listCarreras.get(i);
-                         %>
+                               
+                               if(atrCarrera!=null && claveCarrera.equals(listCarreras.get(i).getClavecarrera()))                                   
+                           {
+                          %>
+                          <option value="<%=atrCarrera%>"selected><%=listCarreras.get(i).getClavecarrera()%>-<%=carrera.getCarrera()%></option>
+                          <%
+                              }else{
+
+                          %>
                          <option value="<%=carrera.getClavecarrera()%>"><%=carrera.getClavecarrera()%>-<%=carrera.getCarrera()%></option>
-                     <%}%>
-                  </select>
+                     <%}}%>
+                    </select>
                  
                   <select id="cmbYear" name="cmbYear">
-                     <option disabled selected  value="">Elige el Año</option>
+                     <option hidden  value="">Elige el Año</option>
                      <%
-                           for (int i=0; i<listYear.size(); i++){
+                           for (int i=11; i<listYear.size(); i++)
+                           {
                                grupo = listYear.get(i);
+                               
+                               if(atrYear!=null && year.equals(listYear.get(i).getYear())) 
+                               {
                          %>
+                          <option value="<%=atrYear%>"selected><%=listYear.get(i).getYear()%></option>
+                        <%
+                            }else{
+
+                      %>
                          <option value="<%=grupo.getYear()%>"><%=grupo.getYear()%></option>
-                     <%}%>
+                     <%}}%>
                   </select>
                  
                  <select id="cmbSemestre" name="cmbSemestre">
-                     <option disabled selected  value="">Elige el Semestre</option>
-                     <%
-                           for (int i=0; i<listSemestre.size(); i++){
+                     <option hidden value="">Elige un Semestre</option>
+                      <%
+                           for (int i=0; i<listSemestre.size(); i++)
+                           {
                                grupo= listSemestre.get(i);
-                         %>
-                         <option value="<%=grupo.getSemestre()%>"><%=grupo.getSemestre()%></option>
-                     <%}%>
+                               
+                               if(atrSemestre!=null && semestre.equals(listSemestre.get(i).getSemestre())) 
+                               {
+                      %>
+                          <option value="<%=atrSemestre%>"selected><%=listSemestre.get(i).getSemestre()%></option>
+
+                      <%
+                              }else{
+
+                      %>
+                         <option value="<%=grupo.getSemestre()%>"><%=grupo.getSemestre()%><%=grupo.getLetra()%></option>
+                     <%}}%>
                   </select>
-                    
-                 <input type="text" id="tfClaveCarrera" name="tfClaveCarrera" hidden="">
+                     <input type="text" id="tfClaveCarrera" name="tfClaveCarrera" hidden="">
                      <input type="text" id="tfYear" name="tfYear" hidden="">
                      <input type="text" id="tfSemestre" name="tfSemestre" hidden="">
                     <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>

@@ -33,6 +33,8 @@ private DAOInscripcion daoInscripcion;
         if(request.getParameter("btnBuscar")!=null)
         {
             request.setAttribute("matricula", request.getParameter("tfMatricula"));
+            request.setAttribute("atrMatricula", request.getParameter("tfMatricula"));
+
         }
         
         if (accion != null && accion.equalsIgnoreCase("nuevo"))

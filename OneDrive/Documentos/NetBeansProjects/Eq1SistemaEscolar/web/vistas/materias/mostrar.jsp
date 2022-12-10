@@ -19,6 +19,9 @@
             
            
             String claveCarrera =(String) request.getAttribute("claveCarrera");
+            String atrCarrera =(String) request.getAttribute("atrCarrera");
+            String atrSemestre =(String) request.getAttribute("atrSemestre");
+
             String semestre =(String) request.getAttribute("semestre");
             claveCarrera = (claveCarrera ==null) ? "" : claveCarrera;
             semestre = (semestre ==null) ? "" : semestre;
@@ -74,23 +77,42 @@
           <div class="row mb-5">
               <form  action="SMateria" method="POST">
                   <select id="cmbCarreras" name="cmbCarreras">
-                     <option disabled selected selected="">Seleciona una Carrera</option>
+                    <option hidden>Seleciona una Carrera</option>
                          <%
-                           for (int i=0; i<listCarreras.size(); i++){
+                           for (int i=0; i<listCarreras.size(); i++)
+                           {
                                carrera = listCarreras.get(i);
-                         %>
+                               
+                               if(atrCarrera!=null && claveCarrera.equals(listCarreras.get(i).getClavecarrera()))                                   
+                           {
+                          %>
+                          <option value="<%=atrCarrera%>"selected><%=listCarreras.get(i).getClavecarrera()%>-<%=carrera.getCarrera()%></option>
+                          <%
+                              }else{
+
+                          %>
                          <option value="<%=carrera.getClavecarrera()%>"><%=carrera.getClavecarrera()%>-<%=carrera.getCarrera()%></option>
-                     <%}%>
+                     <%}}%>
                     </select>
                   
                   <select id="cmbSemestre" name="cmbSemestre">
-                     <option disabled selected  value="">Elige un Semestre</option>
+                     <option hidden value="">Elige un Semestre</option>
                       <%
-                           for (int i=0; i<listSemestre.size(); i++){
+                           for (int i=0; i<listSemestre.size(); i++)
+                           {
                                grupo= listSemestre.get(i);
-                         %>
+                               
+                               if(atrSemestre!=null && semestre.equals(listSemestre.get(i).getSemestre())) 
+                               {
+                      %>
+                          <option value="<%=atrSemestre%>"selected><%=listSemestre.get(i).getSemestre()%></option>
+
+                      <%
+                              }else{
+
+                      %>
                          <option value="<%=grupo.getSemestre()%>"><%=grupo.getSemestre()%><%=grupo.getLetra()%></option>
-                     <%}%>
+                     <%}}%>
                   </select>
                     
                   <input type="text" id="tfClaveCarrera" name="tfClaveCarrera" hidden="">
@@ -107,7 +129,7 @@
             <tr  style="background-color:grey;">
                
                 <th class="text-center">ClaveMateria</th>
-                <th class="text-center">Nombre_Materia</th>
+                <th class="text-center">Materia</th>
                 <th class="text-center">Semestre</th>
                 <th class="text-center">Clave_Carrera</th>
                 <th class="text-center">opciones</th>
@@ -202,20 +224,13 @@
                 "searching": true,
                  "order": true,
                  "info": false,
-                 
-                  columnDefs: [
-            {
-                target: 2,
-                visible: false,
-               
-            },
+                   columnDefs: [
             {
                 target: 3,
                 visible: false,
             },
             
         ],
-
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
                 }

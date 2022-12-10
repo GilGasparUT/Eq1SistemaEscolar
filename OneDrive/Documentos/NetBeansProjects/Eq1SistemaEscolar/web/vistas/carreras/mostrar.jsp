@@ -11,6 +11,8 @@
             claveCarrera = (claveCarrera ==null) ? "" : claveCarrera;
             
             ArrayList<Carrera>lista = daoCarrera.mostrar(claveCarrera);
+            String atrCarrera =(String) request.getAttribute("atrCarrera");
+
             
             ArrayList<Carrera>listCarreras = daoCarrera.mostrar();
 
@@ -61,13 +63,22 @@
           <div class="row mb-5">
               <form  action="SCarrera" method="POST">
                   <select id="cmbCarreras" name="cmbCarreras">
-                     <option disabled selected>Seleciona una Carrera</option>
+                     <option hidden>Seleciona una Carrera</option>
                          <%
-                           for (int i=0; i<listCarreras.size(); i++){
+                           for (int i=0; i<listCarreras.size(); i++)
+                           {
                                carrera = listCarreras.get(i);
-                         %>
+                               
+                               if(atrCarrera!=null && claveCarrera.equals(listCarreras.get(i).getClavecarrera()))                                   
+                           {
+                          %>
+                          <option value="<%=atrCarrera%>"selected><%=listCarreras.get(i).getClavecarrera()%>-<%=carrera.getCarrera()%></option>
+                          <%
+                              }else{
+
+                          %>
                          <option value="<%=carrera.getClavecarrera()%>"><%=carrera.getClavecarrera()%>-<%=carrera.getCarrera()%></option>
-                     <%}%>
+                     <%}}%>
                     </select>
                     <input type="text" id="tfClaveCarrera" name="tfClaveCarrera" hidden="">
                     <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>

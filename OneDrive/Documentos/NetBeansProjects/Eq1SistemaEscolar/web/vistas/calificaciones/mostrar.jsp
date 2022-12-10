@@ -1,25 +1,33 @@
-
 <%@page import="beans.Alumno"%>
 <%@page import="dao.DAOAlumno"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.Calificacion"%>
 <%@page import="dao.DAOCalificacion"%>
 <!DOCTYPE html>
-      <%
-            DAOCalificacion daoCalificacion = new DAOCalificacion();
-            Calificacion calificacion = new Calificacion();
+<%
+     DAOCalificacion daoCalificacion = new DAOCalificacion();
+     Calificacion calificacion = new Calificacion();
+     
+     DAOAlumno daoAlumno = new DAOAlumno();
+     Alumno alumno = new Alumno();
+     
+     String claveInscripcion =(String) request.getAttribute("claveInscripcion");
+     String atrClaveInscripcion =(String) request.getAttribute("atrClaveInscripcion");
+
+     claveInscripcion = (claveInscripcion ==null) ? "" : claveInscripcion;
             
-            DAOAlumno daoAlumno = new DAOAlumno();
-            Alumno alumno = new Alumno();
-            
-            String claveInscripcion =(String) request.getAttribute("claveInscripcion");
-            claveInscripcion = (claveInscripcion ==null) ? "" : claveInscripcion;
-            ArrayList<Calificacion>lista = daoCalificacion.mostrar(claveInscripcion);
+     ArrayList<Calificacion>lista = daoCalificacion.mostrar(claveInscripcion);
+     ArrayList<Calificacion>listClaveInscripcion = daoCalificacion.mostrar();
+     
+     ArrayList<Alumno>listMatricula = daoAlumno.mostrar();
+
            
-            String  usuario = (String) request.getSession().getAttribute("usuario");
-            if(usuario==null)
-            response.sendRedirect("SIndex");
-        %>
+
+    
+  String  usuario = (String) request.getSession().getAttribute("usuario");
+  if(usuario==null)
+  response.sendRedirect("SIndex");
+%>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -59,15 +67,28 @@
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-5">
+          <div class="row mb-5">
               <form  action="SCalificacion" method="POST">
-                  
-                  <select id="cmbCalificacion" name="cmbCalificacion">
-                  <option value="">Elige una Opcion</option>
-                     <option value="2">Rogelio Pascualeño Chepillo<%=alumno.getNombre()%></option>
-                     <option value="4">Adrian Gil Gaspar</option>
+
+                  <select id="cmbCalificacion" name="cmbCalificacion">
+                  <option  hidden>Elige un Alumno</option>
+                     <%
+                           for (int i=0; i<listClaveInscripcion.size(); i++){
+                               calificacion = listClaveInscripcion.get(i);
+                               alumno = listMatricula.get(i);
+                               
+                             if(atrClaveInscripcion!=null && claveInscripcion.equals(listClaveInscripcion.get(i).getClaveinscripcion()))                                   
+                           {
+                          %>
+                          <option value="<%=atrClaveInscripcion%>"selected><%=listClaveInscripcion.get(i).getClaveinscripcion()%>-<%=alumno.getMatricula()%>-<%=alumno.getNombre()%>&nbsp<%=alumno.getApellidos()%></option>
+                          <%
+                              }else{
+
+                          %>
+                         <option value="<%=calificacion.getClaveinscripcion()%>"><%=alumno.getMatricula()%>-<%=alumno.getNombre()%>&nbsp<%=alumno.getApellidos()%></option>
+                     <%}}%>
                     </select>
-                     <input type="text" id="tfClaveInscripcion" name="tfClaveInscripcion">
+                    <input type="text" id="tfClaveInscripcion" name="tfClaveInscripcion" hidden="">
                     <button type="submit" name="btnBuscar" class="btn btn-primary">Buscar</button>
                </form> 
           </div>
@@ -79,7 +100,7 @@
         <thead style="color:white;">
             <tr  style="background-color:grey;">
                
-                <th class="text-center">Clavecalificacion</th>
+                <th class="text-center">ClaveCalificacion</th>
                 <th class="text-center">Parcial 1</th>
                 <th class="text-center">Parcial 2</th>
                 <th class="text-center">Parcial 3</th>
@@ -91,12 +112,10 @@
         </thead>
         <tbody>
              <% 
-                    
-                    
-                   for (int i=0; i<lista.size(); i++) 
-                   {
+                   for (int i=0; i<lista.size(); i++)
+                    {
                      calificacion = lista.get(i);
-                   
+                     
                     %>
             <tr>
                 <td class="text-center"><%=calificacion.getClavecalificacion()%></td>
@@ -182,7 +201,24 @@
                 "searching": true,
                  "order": true,
                  "info": false,
-
+                 columnDefs: [
+            {
+                target: 0,
+                visible: false,
+            },
+            
+           
+            {
+                target: 5,
+                visible: false,
+            },
+            
+            {
+                target: 6,
+                visible: false,
+            }
+            
+        ],
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
                 }

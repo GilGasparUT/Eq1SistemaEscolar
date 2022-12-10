@@ -33,6 +33,7 @@ private DAOAlumno daoAlumno;
         if(request.getParameter("btnBuscar")!=null)
         {
             request.setAttribute("claveCarrera", request.getParameter("tfClaveCarrera"));
+            request.setAttribute("atrCarrera", request.getParameter("tfClaveCarrera"));
         }
         
        else if (accion != null && accion.equalsIgnoreCase("nuevo"))
@@ -62,6 +63,7 @@ private DAOAlumno daoAlumno;
         {
             
             request.setAttribute("matricula", request.getParameter("tfMatricula"));
+            
             acceso = editar;
             
         }
